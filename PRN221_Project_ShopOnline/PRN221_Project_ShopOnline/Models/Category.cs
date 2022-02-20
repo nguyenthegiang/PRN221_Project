@@ -17,5 +17,11 @@ namespace PRN221_Project_ShopOnline.Models
         public string Icon { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+
+        //For Display in CSHTML with HTMLHelper
+        public override string ToString()
+        {
+            return CategoryName;
+        }
     }
 }

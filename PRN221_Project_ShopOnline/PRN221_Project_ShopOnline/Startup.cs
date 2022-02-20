@@ -22,6 +22,7 @@ namespace PRN221_Project_ShopOnline
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Service for Config (default)
             services.AddRazorPages();
         }
 
@@ -45,7 +46,14 @@ namespace PRN221_Project_ShopOnline
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                //endpoints.MapRazorPages();
+
+                //ROUTING
+                //Testing: Default Controller
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Default}/{action=Index}/{id?}"
+                    );
             });
         }
     }
