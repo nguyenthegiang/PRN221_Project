@@ -9,7 +9,7 @@ namespace PRN221_Project_ShopOnline.DAO
 {
     public class CategoryDAO
     {
-        public IEnumerable<Category> GetAllroducts()
+        public IEnumerable<Category> GetAllCategories()
         {
             ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
             IEnumerable<Category> categories = context.Categories.ToList();
