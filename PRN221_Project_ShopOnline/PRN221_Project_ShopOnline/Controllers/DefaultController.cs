@@ -24,6 +24,7 @@ namespace PRN221_Project_ShopOnline.Controllers
             ProductDAO productDao = new ProductDAO();
             List<Product> products = productDao.GetAllProducts().ToList();
 
+            //set to ViewBag
             ViewBag.Categories = categories;
             ViewBag.Products = products;
 
