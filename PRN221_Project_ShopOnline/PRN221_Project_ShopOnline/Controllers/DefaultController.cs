@@ -12,7 +12,7 @@ namespace PRN221_Project_ShopOnline.Controllers
 {
     public class DefaultController : Controller
     {
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
             var view = View("Views/Index.cshtml");
 
@@ -24,8 +24,8 @@ namespace PRN221_Project_ShopOnline.Controllers
             ProductDAO productDao = new ProductDAO();
             List<Product> products = productDao.GetAllProducts().ToList();
 
-            ViewBag.Categories = new MultiSelectList(categories);
-            ViewBag.Products = new MultiSelectList(products);
+            ViewBag.Categories = categories;
+            ViewBag.Products = products;
 
             return view;
         }
