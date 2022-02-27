@@ -38,13 +38,13 @@ CREATE TABLE Category (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO Category VALUES (N'LAPTOP', N'<i class="fas fa-laptop"></i>');
-INSERT INTO Category VALUES (N'PC', N'<i class="fas fa-desktop"></i>');
-INSERT INTO Category VALUES (N'THIẾT BỊ VĂN PHÒNG', N'<i class="far fa-folder-open"></i>');
-INSERT INTO Category VALUES (N'LINH KIỆN MÁY TÍNH', N'<i class="far fa-keyboard"></i>');
-INSERT INTO Category VALUES (N'ĐIỆN THOẠI', N'<i class="fas fa-mobile-alt"></i>');
-INSERT INTO Category VALUES (N'TABLET', N'<i class="fas fa-tablet-alt"></i>');
-INSERT INTO Category VALUES (N'PHỤ KIỆN', N'<i class="fas fa-headphones"></i>');
+INSERT INTO Category VALUES (N'LAPTOP', N'fas fa-laptop');
+INSERT INTO Category VALUES (N'PC', N'fas fa-desktop');
+INSERT INTO Category VALUES (N'THIẾT BỊ VĂN PHÒNG', N'far fa-folder-open');
+INSERT INTO Category VALUES (N'LINH KIỆN MÁY TÍNH', N'far fa-keyboard');
+INSERT INTO Category VALUES (N'ĐIỆN THOẠI', N'fas fa-mobile-alt');
+INSERT INTO Category VALUES (N'TABLET', N'fas fa-tablet-alt');
+INSERT INTO Category VALUES (N'PHỤ KIỆN', N'fas fa-headphones');
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
