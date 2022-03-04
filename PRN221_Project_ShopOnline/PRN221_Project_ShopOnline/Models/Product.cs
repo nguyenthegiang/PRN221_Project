@@ -33,5 +33,13 @@ namespace PRN221_Project_ShopOnline.Models
         public virtual User Seller { get; set; }
         public virtual ProductStatus Status { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        /*Function to write the Product's Price in proper form:
+        Example: 1.000.000*/
+        public String GetPriceWithDot()
+        {
+            int price = (int) SellPrice;
+            return price.ToString("N0");
+        }
     }
 }

@@ -94,7 +94,7 @@
                                     <h5 class="card-title">
                                         <a href="productDetail?ProductID=@product.ProductId" title="View Product">@product.ProductName</a>
                                     </h5>
-                                    <p class="card-text">@product.SellPrice</p>
+                                    <p class="card-text">@product.GetPriceWithDot()</p>
                                     <a href="#" class="btn btn-primary">Add to Cart</a>
                                 </div>
                             </div>
