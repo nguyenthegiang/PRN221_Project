@@ -49,7 +49,7 @@ namespace PRN221_Project_ShopOnline
                 //endpoints.MapRazorPages();
 
                 //ROUTING
-                //Testing: Default Controller
+                //Home Page
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Default}/{action=Index}"
