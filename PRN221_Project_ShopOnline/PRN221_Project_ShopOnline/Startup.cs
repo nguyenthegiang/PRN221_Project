@@ -52,7 +52,7 @@ namespace PRN221_Project_ShopOnline
                 //Testing: Default Controller
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Default}/{action=Index}/{id?}"
+                    pattern: "{controller=Default}/{action=Index}"
                     );
             });
         }

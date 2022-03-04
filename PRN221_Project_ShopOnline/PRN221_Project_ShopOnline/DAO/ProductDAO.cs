@@ -9,11 +9,18 @@ namespace PRN221_Project_ShopOnline.DAO
 {
     public class ProductDAO
     {
+        private readonly ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
+
         public IEnumerable<Product> GetAllProducts()
         {
-            ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
             IEnumerable<Product> products = context.Products.ToList();
             return products;
+        }
+
+        public Product GetProductByID(int id)
+        {
+            Product product = context.Products.SingleOrDefault(p => p.ProductId == id);
+            return product;
         }
     }
 }
