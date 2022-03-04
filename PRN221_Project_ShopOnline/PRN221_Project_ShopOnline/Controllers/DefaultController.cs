@@ -27,6 +27,29 @@ namespace PRN221_Project_ShopOnline.Controllers
             //set to ViewBag
             ViewBag.Categories = categories;
             ViewBag.Products = products;
+            //no selected category
+            ViewBag.SelectedCategory = 0;
+
+            return view;
+        }
+
+        public IActionResult FindProductByCategory(int cid)
+        {
+            var view = View("Views/Index.cshtml");
+
+            //Get list Category
+            CategoryDAO categoryDao = new CategoryDAO();
+            List<Category> categories = categoryDao.GetAllCategories().ToList();
+
+            //Get list Products by Category
+            ProductDAO productDao = new ProductDAO();
+            List<Product> products = productDao.GetProductsByCategory(cid).ToList();
+
+            //set to ViewBag
+            ViewBag.Categories = categories;
+            ViewBag.Products = products;
+            //Selected Category (for different display)
+            ViewBag.SelectedCategory = cid;
 
             return view;
         }

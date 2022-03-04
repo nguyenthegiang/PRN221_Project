@@ -8,6 +8,7 @@
     //Get data from ViewBag
     List<Category> categories = (List<Category>)ViewBag.Categories;
     List<Product> products = (List<Product>)ViewBag.Products;
+    int selectedCategory = ViewBag.SelectedCategory;
 }
 
 <!DOCTYPE html>
@@ -62,21 +63,28 @@
         <div class="row">
             <section class="jumbotron text-center" style="background-color: white;">
                 <div class="container">
-                    <h1 class="jumbotron-heading"><img src="image/MainLogo.png" alt="Main Logo" width="60%" /></h1>
+                    <h1 class="jumbotron-heading"><img src="/image/MainLogo.png" alt="Main Logo" width="60%" /></h1>
                     <p class="lead text-muted mb-0">Điện thoại, Tablet, Laptop, Phụ kiện chính hãng giá tốt...</p>
                 </div>
             </section>
         </div>
+        <br />
 
         <div class="row">
             <!--Category-->
             <div class="col-3">
                 <div class="card bg-light mb-3">
                     <div class="card-header bg-info text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
-                    <ul class="list-group category_block">
+                    <ul class="list-group category_block" style="list-style-type:none">
                         @foreach (Category category in categories)
                         {
-                            <a class="list-group-item" href="home?CategoryID=@category.CategoryId"><i class="@category.Icon"></i> @category.CategoryName</a>
+                            <li>
+                                @* display differently if category is selected *@
+                                <a class="list-group-item @(category.CategoryId == selectedCategory ? "active" : "")" 
+                                   href="/Default/FindProductByCategory/@category.CategoryId">
+                                    <i class="@category.Icon"></i> @category.CategoryName
+                                </a>
+                            </li>
                         }
                     </ul>
                 </div>
