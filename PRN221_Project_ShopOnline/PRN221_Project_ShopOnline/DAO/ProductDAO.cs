@@ -17,10 +17,16 @@ namespace PRN221_Project_ShopOnline.DAO
             return products;
         }
 
-        public Product GetProductByID(int id)
+        public Product GetProductByID(int Id)
         {
-            Product product = context.Products.SingleOrDefault(p => p.ProductId == id);
+            Product product = context.Products.SingleOrDefault(p => p.ProductId == Id);
             return product;
+        }
+
+        public IEnumerable<Product> GetProductsByCategory(int CateId)
+        {
+            IEnumerable<Product> products = context.Products.Where(p => p.CategoryId == CateId).ToList();
+            return products;
         }
     }
 }
