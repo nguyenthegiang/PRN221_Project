@@ -89,7 +89,9 @@
                     {
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="card" style="width: 18rem;">
-                                <img src="/image/@product.ImageLink" class="card-img-top" alt="...">
+                                <a href="productDetail?ProductID=@product.ProductId">
+                                    <img src="/image/@product.ImageLink" class="card-img-top" alt="...">
+                                </a>
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <a href="productDetail?ProductID=@product.ProductId" title="View Product">@product.ProductName</a>
