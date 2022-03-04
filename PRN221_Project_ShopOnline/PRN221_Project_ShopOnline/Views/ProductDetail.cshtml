@@ -9,4 +9,151 @@
     Product product = (Product)ViewBag.Product;
 }
 
-<h1>@product.ProductName</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Computer ERA</title>
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/image/faviconLogo.png" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--Font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <style>
+        .gallery-wrap .img-big-wrap img {
+            height: 450px;
+            width: auto;
+            display: inline-block;
+            cursor: zoom-in;
+        }
+
+
+        .gallery-wrap .img-small-wrap .item-gallery {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #ddd;
+            margin: 7px 2px;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .gallery-wrap .img-small-wrap {
+            text-align: center;
+        }
+
+            .gallery-wrap .img-small-wrap img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover;
+                border-radius: 4px;
+                cursor: zoom-in;
+            }
+
+        .img-big-wrap img {
+            width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!--Menu-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <!--Logo-->
+                    <a class="navbar-brand" href="#">
+                        <img src="/image/Other/Logo.jpg" width="200px">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <!--Cart-->
+                                <a class="btn btn-info" href="show">
+                                    <i class="fa fa-shopping-cart"></i> Cart
+                                    <span class="badge bg-secondary" id="CartNum">5</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <!--Login-->
+                                <a class="nav-link" href="#">Login</a>
+                            </li>
+                        </ul>
+                        <!--Search-->
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="container">
+                <div class="card">
+                    <div class="row">
+                        <aside class="col-sm-5 border-right">
+                            <article class="gallery-wrap">
+                                <div class="img-big-wrap">
+                                    <div> <a href="#"><img src="/image/@product.ImageLink"></a></div>
+                                </div> <!-- slider-product.// -->
+                                <div class="img-small-wrap">
+                                </div> <!-- slider-nav.// -->
+                            </article> <!-- gallery-wrap .end// -->
+                        </aside>
+                        <aside class="col-sm-7">
+                            @*<h3 style="color: red">${message}</h3>*@
+                            <article class="card-body p-5">
+                                <h3 class="title mb-3">@product.ProductName</h3>
+
+                                <p class="price-detail-wrap">
+                                    <span class="price h3 text-warning">
+                                        <span class="currency">VND </span><span class="num">@product.SellPrice</span>
+                                    </span>
+                                </p> <!-- price-detail-wrap .// -->
+                                <dl class="item-property">
+                                    <dt>Description</dt>
+                                    <dd>
+                                        <p>
+                                            @product.Description
+                                        </p>
+                                    </dd>
+                                </dl>
+
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <dl class="param param-inline">
+                                            <dt>Quantity: </dt>
+                                            <dd>
+                                                <select class="form-select" style="width:70px;" id="select_id">
+                                                    @for (int i = 0; i < 10; i++)
+                                                    {
+                                                        <option value="@i"> @i </option>
+                                                    }
+                                                </select>
+                                            </dd>
+                                        </dl>  <!-- item-property .// -->
+                                    </div> <!-- col.// -->
+                                </div> <!-- row.// -->
+                                <hr>
+                                <button class="btn btn-lg btn-outline-info text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </button>
+                            </article> <!-- card-body.// -->
+                        </aside> <!-- col.// -->
+                    </div> <!-- row.// -->
+                </div> <!-- card.// -->
+
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
