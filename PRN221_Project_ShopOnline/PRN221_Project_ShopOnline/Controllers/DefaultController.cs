@@ -69,6 +69,8 @@ namespace PRN221_Project_ShopOnline.Controllers
             //set to ViewBag
             ViewBag.Categories = categories;
             ViewBag.Products = products;
+            //no selected category
+            ViewBag.SelectedCategory = 0;
 
             return view;
         }

@@ -50,10 +50,11 @@
                             </li>
                         </ul>
                         <!--Search-->
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        @using (Html.BeginForm("SearchProductByName", "Default", FormMethod.Post))
+                        {
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="ProductName">
                             <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        }
                     </div>
                 </div>
             </nav>
@@ -80,7 +81,7 @@
                         {
                             <li>
                                 @* display differently if category is selected *@
-                                <a class="list-group-item @(category.CategoryId == selectedCategory ? "active" : "")" 
+                                <a class="list-group-item @(category.CategoryId == selectedCategory ? "active" : "")"
                                    href="/Default/FindProductByCategory/@category.CategoryId">
                                     <i class="@category.Icon"></i> @category.CategoryName
                                 </a>
