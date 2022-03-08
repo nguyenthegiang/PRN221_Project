@@ -32,7 +32,7 @@
                 <div class="container-fluid">
                     <!--Logo-->
                     <a class="navbar-brand" href="/">
-                        <img src="/image/Other/Logo.jpg" width="200px">
+                        <img src="/image/Other/Logo.jpg" id="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -55,8 +55,8 @@
                         @using (Html.BeginForm("SearchProductByName", "Default", FormMethod.Post))
                         {
                             <input class="form-control me-2" type="search" placeholder="Search" 
-                                   aria-label="Search" name="ProductName" style="display: inline; width: 300px;">
-                            <button class="btn btn-outline-success" type="submit" style="display: inline;">Search</button>
+                                   aria-label="Search" name="ProductName" id="searchBar">
+                            <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
                         }
                     </div>
                 </div>
