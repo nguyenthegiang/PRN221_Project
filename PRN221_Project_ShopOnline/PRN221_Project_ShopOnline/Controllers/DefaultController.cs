@@ -53,5 +53,24 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             return view;
         }
+
+        public IActionResult SearchProductByName(string ProductName)
+        {
+            var view = View("Views/Index.cshtml");
+
+            //Get list Category
+            CategoryDAO categoryDao = new CategoryDAO();
+            List<Category> categories = categoryDao.GetAllCategories().ToList();
+
+            //Get list Products by Name
+            ProductDAO productDao = new ProductDAO();
+            List<Product> products = productDao.SearchProductByName(ProductName).ToList();
+
+            //set to ViewBag
+            ViewBag.Categories = categories;
+            ViewBag.Products = products;
+
+            return view;
+        }
     }
 }
