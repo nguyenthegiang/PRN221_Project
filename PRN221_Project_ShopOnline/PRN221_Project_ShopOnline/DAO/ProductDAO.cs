@@ -28,5 +28,11 @@ namespace PRN221_Project_ShopOnline.DAO
             IEnumerable<Product> products = context.Products.Where(p => p.CategoryId == CateId).ToList();
             return products;
         }
+
+        public IEnumerable<Product> SearchProductByName(string productName)
+        {
+            IEnumerable<Product> products = context.Products.Where(p => p.ProductName.Contains(productName)).ToList();
+            return products;
+        }
     }
 }

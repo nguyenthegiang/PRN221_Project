@@ -60,6 +60,12 @@ namespace PRN221_Project_ShopOnline
                     name: "default",
                     pattern: "{controller=Default}/{action=FindProductByCategory}/{cid}"
                     );
+
+                //Search Product By Name
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Default}/{action=FindProductByCategory}/{pname}"
+                    );
             });
         }
     }
