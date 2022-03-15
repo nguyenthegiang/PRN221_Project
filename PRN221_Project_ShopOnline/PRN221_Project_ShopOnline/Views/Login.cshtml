@@ -21,9 +21,9 @@
     <div id="logreg-forms">
         <form class="form-signin" action="Login/Login" method="post">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-            @*<p class="text-danger"></p>*@
-            <input name="user" value="" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-            <input name="pass" value="" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <p class="text-danger">@ViewBag.Message</p>
+            <input name="username" value="" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+            <input name="password" value="" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 
             <div class="form-group form-check">
                 <input name="remember" value="1" type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -37,9 +37,9 @@
 
         <form action="signup" method="post" class="form-signup">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign up</h1>
-            <input name="user" type="text" id="user-name" class="form-control" placeholder="User name" required="" autofocus="">
-            <input name="pass" type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
-            <input name="repass" type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
+            <input name="username" type="text" id="user-name" class="form-control" placeholder="User name" required="" autofocus="">
+            <input name="password" type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
+            <input name="repassword" type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
             <div class="form-group">
                 <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="https://policies.google.com/terms?gl=VN&hl=vi" style="display: inline">Terms &amp; Conditions</a></label>
             </div>

@@ -11,7 +11,7 @@ namespace PRN221_Project_ShopOnline.DAO
     {
         private readonly ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
 
-        public User login(string username, string password)
+        public User Login(string username, string password)
         {
             User user = context.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
             return user;

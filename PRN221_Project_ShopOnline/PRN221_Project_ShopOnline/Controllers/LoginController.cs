@@ -17,11 +17,21 @@ namespace PRN221_Project_ShopOnline.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string user, string pass, string remember)
+        public IActionResult Login(string username, string password, string remember)
         {
             //Check login account with Database
-            
-            return Redirect("/");
+            UserDAO dao = new UserDAO();
+            User user = dao.Login(username, password);
+            if (user == null)
+            {
+                //user not exists -> back to Login
+                ViewBag.Message = "Wrong username or password";
+                return View("Views/Login.cshtml");
+            } else
+            {
+                //login success -> to Home Page
+                return Redirect("/");
+            }
         }
     }
 }
