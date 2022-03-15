@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 using PRN221_Project_ShopOnline.DAO;
 using PRN221_Project_ShopOnline.Models;
+
+using System.Web;
 
 namespace PRN221_Project_ShopOnline.Controllers
 {
@@ -29,7 +33,13 @@ namespace PRN221_Project_ShopOnline.Controllers
                 return View("Views/Login.cshtml");
             } else
             {
-                //login success -> to Home Page
+                //login success: 
+
+                //set User to Session
+                //Session["User"] = user;
+                HttpContext.Session.SetString("username", user.Username);
+
+                //to Home Page
                 return Redirect("/");
             }
         }
