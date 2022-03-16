@@ -83,9 +83,27 @@ namespace PRN221_Project_ShopOnline.Controllers
             return Redirect("/");
         }
 
-        public IActionResult Signup()
+        public IActionResult Signup(string username, string email, string password, string repassword)
         {
-            return View("Views/Login.cshtml");
+            //check confirm password
+            if (password.Equals(repassword))
+            {
+                //sign up
+                UserDAO dao = new UserDAO();
+                dao.SignUp(username, password, email);
+
+                //set login info
+                ViewBag.CookieUsername = username;
+                ViewBag.CookiePassword = password;
+
+                //back to login
+                return View("Views/Login.cshtml");
+            } else
+            {
+                //back to login if not equal
+                ViewBag.Message = "Confirm Password does not match";
+                return View("Views/Login.cshtml");
+            }
         }
     }
 }
