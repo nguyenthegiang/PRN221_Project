@@ -71,5 +71,11 @@ namespace PRN221_Project_ShopOnline.Controllers
                 return Redirect("/");
             }
         }
+
+        public IActionResult Logout()
+        {
+
+            return Redirect("/");
+        }
     }
 }

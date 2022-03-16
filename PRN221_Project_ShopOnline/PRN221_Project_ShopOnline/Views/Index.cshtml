@@ -50,20 +50,30 @@
                                     <span class="badge bg-secondary" id="CartNum">5</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <!--Login: only show if user is not login -> check Session-->
-                                @if (httpContextAccessor.HttpContext.Session.GetString("userId") == null)
-                                {
+                            <!--Login: only show if user is not login -> check Session-->
+                            @if (httpContextAccessor.HttpContext.Session.GetString("userId") == null)
+                            {
+                                <li class="nav-item">
                                     <a class="nav-link" href="/Login">Login</a>
-                                }
-                                else
-                                {
-                                    //if user is login -> show Message
-                                    <a class="nav-link" href="/Login">
+                                </li>
+                            }
+                            else
+                            {
+                                //if user is login
+                                //show Message
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
                                         Hello @httpContextAccessor.HttpContext.Session.GetString("username")
                                     </a>
-                                }
-                            </li>
+                                </li>
+
+                                //logout link
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Login/Logout">
+                                        Log out
+                                    </a>
+                                </li>
+                            }
                         </ul>
                         <!--Search-->
                         @using (Html.BeginForm("SearchProductByName", "Default", FormMethod.Post))
