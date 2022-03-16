@@ -36,8 +36,8 @@ namespace PRN221_Project_ShopOnline.Controllers
                 //login success: 
 
                 //set User to Session
-                //Session["User"] = user;
                 HttpContext.Session.SetString("username", user.Username);
+                HttpContext.Session.SetInt32("userId", user.UserId);
 
                 //to Home Page
                 return Redirect("/");

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,7 +28,10 @@ namespace PRN221_Project_ShopOnline
             services.AddSession(cfg => {                    // Đăng ký dịch vụ Session
                 cfg.Cookie.Name = "computerera";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
                 cfg.IdleTimeout = new TimeSpan(0, 60, 0);    // Thời gian tồn tại của Session
+                cfg.Cookie.HttpOnly = true;
+                cfg.Cookie.IsEssential = true;
             });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //Service for Config (default)
             services.AddRazorPages();

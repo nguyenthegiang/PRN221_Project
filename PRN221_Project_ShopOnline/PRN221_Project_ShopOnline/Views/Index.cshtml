@@ -4,6 +4,10 @@
 
 @using PRN221_Project_ShopOnline.Models
 
+@* for Session *@
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
+
 @{
     //Get data from ViewBag
     List<Category> categories = (List<Category>)ViewBag.Categories;
@@ -47,14 +51,24 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <!--Login-->
-                                <a class="nav-link" href="/Login">Login</a>
+                                <!--Login: only show if user is not login -> check Session-->
+                                @if (httpContextAccessor.HttpContext.Session.GetString("userId") == null)
+                                {
+                                    <a class="nav-link" href="/Login">Login</a>
+                                }
+                                else
+                                {
+                                    //if user is login -> show Message
+                                    <a class="nav-link" href="/Login">
+                                        Hello @httpContextAccessor.HttpContext.Session.GetString("username")
+                                    </a>
+                                }
                             </li>
                         </ul>
                         <!--Search-->
                         @using (Html.BeginForm("SearchProductByName", "Default", FormMethod.Post))
                         {
-                            <input class="form-control me-2" type="search" placeholder="Search" 
+                            <input class="form-control me-2" type="search" placeholder="Search"
                                    aria-label="Search" name="ProductName" id="searchBar">
                             <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
                         }
