@@ -74,7 +74,12 @@ namespace PRN221_Project_ShopOnline.Controllers
 
         public IActionResult Logout()
         {
+            //Remove Session
+            HttpContext.Session.Remove("userId");
+            HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("password");
 
+            //back to home
             return Redirect("/");
         }
     }

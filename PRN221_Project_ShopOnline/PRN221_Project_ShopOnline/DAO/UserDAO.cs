@@ -16,5 +16,19 @@ namespace PRN221_Project_ShopOnline.DAO
             User user = context.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
             return user;
         }
+
+        public void SignUp(string username, string password, string email)
+        {
+            User user = new User();
+            user.Username = username;
+            user.Password = password;
+            user.Email = email;
+            //default role: customer
+            user.IsAdmin = 0;
+            user.IsSeller = 0;
+
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
     }
 }
