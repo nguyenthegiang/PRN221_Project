@@ -82,5 +82,10 @@ namespace PRN221_Project_ShopOnline.Controllers
             //back to home
             return Redirect("/");
         }
+
+        public IActionResult Signup()
+        {
+            return View("Views/Login.cshtml");
+        }
     }
 }
