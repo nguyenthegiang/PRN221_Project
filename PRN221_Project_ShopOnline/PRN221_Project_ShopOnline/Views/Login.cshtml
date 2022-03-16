@@ -2,6 +2,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    //Get data from Cookies (if has) for auto login
+    string username = ViewBag.CookieUsername;
+    string password = ViewBag.CookiePassword;
 }
 
 <!DOCTYPE html>
@@ -22,8 +25,8 @@
         <form class="form-signin" action="Login/Login" method="post">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
             <p class="text-danger">@ViewBag.Message</p>
-            <input name="username" value="" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-            <input name="password" value="" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <input name="username" value="@username" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+            <input name="password" value="@password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 
             <div class="form-group form-check">
                 <input name="remember" value="1" type="checkbox" class="form-check-input" id="exampleCheck1">

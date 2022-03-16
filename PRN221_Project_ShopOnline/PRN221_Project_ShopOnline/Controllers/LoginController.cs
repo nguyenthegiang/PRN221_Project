@@ -16,6 +16,15 @@ namespace PRN221_Project_ShopOnline.Controllers
     {
         public IActionResult Index()
         {
+            //if has Cookies -> set username & password for auto login
+            ViewBag.CookieUsername = "";
+            ViewBag.CookiePassword = "";
+            if (HttpContext.Request.Cookies.ContainsKey("username"))
+            {
+                ViewBag.CookieUsername = HttpContext.Request.Cookies["username"];
+                ViewBag.CookiePassword = HttpContext.Request.Cookies["password"];
+            }
+
             return View("Views/Login.cshtml");
         }
 
@@ -42,7 +51,19 @@ namespace PRN221_Project_ShopOnline.Controllers
                 //set User to Cookies (for auto Login)
                 if (!HttpContext.Request.Cookies.ContainsKey("userId"))
                 {
-                    HttpContext.Response.Cookies.Append("username", user.Username);
+                    CookieOptions userOptions = new CookieOptions();
+                    userOptions.Expires = new DateTimeOffset(DateTime.Now.AddHours(1)); //cookie last for 1 hour
+                    HttpContext.Response.Cookies.Append("username", user.Username, userOptions);
+                    
+                    CookieOptions passwordOptions = new CookieOptions();
+                    //if user choose [Remember Me] -> save password
+                    if (remember != null)
+                    {
+                        passwordOptions.Expires = new DateTimeOffset(DateTime.Now.AddHours(1));
+                    } else
+                    {
+                        passwordOptions.Expires = new DateTimeOffset(DateTime.Now);
+                    }
                     HttpContext.Response.Cookies.Append("password", user.Password);
                 }
 
