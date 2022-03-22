@@ -11,6 +11,7 @@ namespace PRN221_Project_ShopOnline.DAO
     {
         private readonly ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
 
+        /*-------------Customer-------------*/
         public IEnumerable<Product> GetAllProducts()
         {
             IEnumerable<Product> products = context.Products.ToList();
@@ -32,6 +33,13 @@ namespace PRN221_Project_ShopOnline.DAO
         public IEnumerable<Product> SearchProductByName(string productName)
         {
             IEnumerable<Product> products = context.Products.Where(p => p.ProductName.Contains(productName)).ToList();
+            return products;
+        }
+
+        /*-------------Seller-------------*/
+        public IEnumerable<Product> GetProductsBySeller(int SellerId)
+        {
+            IEnumerable<Product> products = context.Products.Where(p => p.SellerId == SellerId).ToList();
             return products;
         }
     }
