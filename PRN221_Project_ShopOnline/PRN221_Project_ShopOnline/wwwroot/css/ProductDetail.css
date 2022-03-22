@@ -31,3 +31,19 @@
     width: 100% !important;
     height: auto !important;
 }
+
+/*Search*/
+#searchBar {
+    display: inline;
+    width: 300px;
+}
+
+#searchButton {
+    display: inline;
+}
+
+/*Other*/
+#logo {
+    width: 200px;
+}
+
