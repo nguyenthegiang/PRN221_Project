@@ -1,7 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@using PRN221_Project_ShopOnline.Models;
+
 @{
+    //Get data from ViewBag
+    List<Product> products = (List<Product>)ViewBag.Products;
 }
 
 <!DOCTYPE html>
@@ -337,22 +342,23 @@
         }
     </style>
     <script>
-            function ProductID(PID) {
-                document.getElementById("pid").setAttribute("value", PID);
-            }
-            function ProductID2(PID) {
-                document.getElementById("pid2").setAttribute("value", PID);
-            }
-            function search() {
-                var searchText = document.getElementById("search_Manager").value;
-                location.href = "searchInManager?text=" + searchText;
-                return false;
-            }
+        function ProductID(PID) {
+            document.getElementById("pid").setAttribute("value", PID);
+        }
+        function ProductID2(PID) {
+            document.getElementById("pid2").setAttribute("value", PID);
+        }
+        function search() {
+            var searchText = document.getElementById("search_Manager").value;
+            location.href = "searchInManager?text=" + searchText;
+            return false;
+        }
     </script>
 </head>
 <body>
     @Html.Partial("MenuBar")
 
+    <!--Search-->
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="searchbar">
@@ -361,6 +367,8 @@
             </div>
         </div>
     </div>
+
+    <!--List Products-->
     <div class="container-xl" style="margin-left: 270px;">
         <div class="table-responsive">
             <div class="table-wrapper">
@@ -385,35 +393,31 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        <c:forEach items="${list}" var="o">
+                        @foreach (Product product in products)
+                        {
                             <tr>
-                                <td>${o.id}</td>
-                                <td>${o.name}</td>
-                                <td><img src="image/${o.imageLink}" style="height: 100px"></td>
-                                <td>${o.priceWithDot} VND</td>
+                                <td>@product.ProductId</td>
+                                <td>@product.ProductName</td>
+                                <td><img src="~/image/@product.ImageLink" style="height: 100px"></td>
+                                <td>@product.GetPriceWithDot() VND</td>
                                 <td>
                                     <!--Link to GET in EditControl-->
-                                    <a href="edit?ProductID=${o.id}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" onclick="ProductID2(${o.id})" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    <a href="edit?ProductID=@product.ProductId" class="edit">
+                                        <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                    </a>
+                                    <a href="#deleteEmployeeModal" onclick="ProductID2(@product.ProductId)" class="delete" data-toggle="modal">
+                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                    </a>
                                 </td>
                             </tr>
-                        </c:forEach>
-
+                        }
                     </tbody>
                 </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>6</b> out of <b>${count}</b> entries</div>
-                    <ul class="pagination">
-                        <c:forEach begin="1" end="${end}" var="i">
-                            <li class="page-item ${tag == i?" active":""}"><a href="manager?index=${i}" class="page-link">${i}</a></li>
-                        </c:forEach>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
-    <!-- Add Product -->
+
+    <!-- [Modal] Add Product -->
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -469,7 +473,7 @@
         </div>
     </div>
 
-    <!-- Delete Product -->
+    <!-- [Modal] Delete Product -->
     <div id="deleteEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
