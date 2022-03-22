@@ -9,7 +9,6 @@
 @{
 }
 
-<!--Menu Bar with Search-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <!--Logo-->
@@ -83,13 +82,6 @@
                     </li>
                 }
             </ul>
-            <!--Search-->
-            @using (Html.BeginForm("SearchProductByName", "Default", FormMethod.Post))
-            {
-                <input class="form-control me-2" type="search" placeholder="Search"
-                       aria-label="Search" name="ProductName" id="searchBar">
-                <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
-            }
         </div>
     </div>
 </nav>
