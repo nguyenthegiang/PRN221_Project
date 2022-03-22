@@ -47,6 +47,8 @@ namespace PRN221_Project_ShopOnline.Controllers
                 HttpContext.Session.SetString("username", user.Username);
                 HttpContext.Session.SetString("password", user.Password);
                 HttpContext.Session.SetInt32("userId", user.UserId);
+                HttpContext.Session.SetInt32("isSeller", (int)user.IsSeller);
+                HttpContext.Session.SetInt32("isAdmin", (int)user.IsAdmin);
 
                 //set User to Cookies (for auto Login)
                 if (!HttpContext.Request.Cookies.ContainsKey("userId"))
