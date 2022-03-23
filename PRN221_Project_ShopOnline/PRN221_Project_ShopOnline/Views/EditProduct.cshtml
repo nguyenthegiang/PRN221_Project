@@ -44,7 +44,8 @@
                 <form action="edit" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Product</h4>
-                        <a type="button" class="close" href="manager" aria-hidden="true">&times;</a>
+                        <!--Cancel: Back to Manage Product-->
+                        <a type="button" class="close" href="/ProductManager/Index" aria-hidden="true">&times;</a>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -90,7 +91,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a type="button" class="btn btn-default" href="manager">Cancel</a>
+                        <!--Cancel: Back to Manage Product-->
+                        <a type="button" class="btn btn-default" href="/ProductManager/Index">Cancel</a>
+                        <!--Submit-->
                         <input type="submit" class="btn btn-info" value="Save">
                     </div>
                 </form>

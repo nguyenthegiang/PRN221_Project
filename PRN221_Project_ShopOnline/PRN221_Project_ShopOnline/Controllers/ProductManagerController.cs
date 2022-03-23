@@ -78,6 +78,7 @@ namespace PRN221_Project_ShopOnline.Controllers
             return View("Views/ProductManager.cshtml");
         }
 
+        //Go to Edit Form
         public IActionResult EditProduct(int productId)
         {
             //Get info of this Seller from Session
@@ -100,6 +101,13 @@ namespace PRN221_Project_ShopOnline.Controllers
             ViewBag.SellerName = sellerName;
 
             return View("Views/EditProduct.cshtml");
+        }
+
+        //Update Product in DB
+        public IActionResult UpdateProduct()
+        {
+            //todo: update product in db
+            return null;
         }
     }
 }
