@@ -35,5 +35,33 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             return View("Views/ProductManager.cshtml");
         }
+
+        [HttpPost]
+        public IActionResult AddProduct(string name, string description, string price, 
+            string imageLink, string CategoryID, string SellerID, string amount)
+        {
+            try
+            {
+                //Convert data
+                Product product = new Product();
+                product.ProductName = name;
+                product.Description = description;
+                product.SellPrice = int.Parse(price);
+                product.ImageLink = imageLink;
+                product.CategoryId = int.Parse(CategoryID);
+                product.SellerId = int.Parse(SellerID);
+                product.Amount = int.Parse(amount);
+
+                //Add to DB
+                ProductDAO dao = new ProductDAO();
+                dao.AddProduct(product);
+            } catch (Exception ex)
+            {
+                //Wrong input -> notify
+            }
+
+            //Back to Manage Product
+            return Redirect("/ProductManager/Index");
+        }
     }
 }

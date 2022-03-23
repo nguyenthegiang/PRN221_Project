@@ -46,6 +46,7 @@ namespace PRN221_Project_ShopOnline.DAO
         public void AddProduct(Product product)
         {
             context.Products.Add(product);
+            context.SaveChanges();
         }
     }
 }
