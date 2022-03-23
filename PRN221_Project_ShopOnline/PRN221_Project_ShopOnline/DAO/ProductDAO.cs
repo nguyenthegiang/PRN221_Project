@@ -42,5 +42,10 @@ namespace PRN221_Project_ShopOnline.DAO
             IEnumerable<Product> products = context.Products.Where(p => p.SellerId == SellerId).ToList();
             return products;
         }
+
+        public void AddProduct(Product product)
+        {
+            context.Products.Add(product);
+        }
     }
 }
