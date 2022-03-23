@@ -110,10 +110,11 @@
                                 <td><img src="~/image/@product.ImageLink" style="height: 100px"></td>
                                 <td>@product.GetPriceWithDot() VND</td>
                                 <td>
-                                    <!--Link to GET in EditControl-->
-                                    <a href="edit?ProductID=@product.ProductId" class="edit">
+                                    <!--Edit Product Link-->
+                                    <a href="EditProduct/@product.ProductId" class="edit">
                                         <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </a>
+                                    <!--Delete Product Link-->
                                     <a href="#deleteEmployeeModal" onclick="ProductID2(@product.ProductId)" class="delete" data-toggle="modal">
                                         <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                     </a>

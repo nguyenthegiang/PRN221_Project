@@ -77,5 +77,10 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             return View("Views/ProductManager.cshtml");
         }
+
+        public IActionResult EditProduct(string productId)
+        {
+            return View("Views/EditProduct.cshtml");
+        }
     }
 }
