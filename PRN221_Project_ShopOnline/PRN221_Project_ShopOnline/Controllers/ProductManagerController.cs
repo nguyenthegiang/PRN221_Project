@@ -22,8 +22,16 @@ namespace PRN221_Project_ShopOnline.Controllers
             ProductDAO productDAO = new ProductDAO();
             List<Product> products = productDAO.GetProductsBySeller(sellerId).ToList();
 
+            //Get list category for [Create Product]
+            CategoryDAO categoryDAO = new CategoryDAO();
+            List<Category> categories = categoryDAO.GetAllCategories().ToList();
+
             //Set data to View
             ViewBag.Products = products;
+            ViewBag.Categories = categories;
+            //User info for Seller in [Create Product]
+            ViewBag.SellerId = sellerId;
+            ViewBag.SellerName = sellerName;
 
             return View("Views/ProductManager.cshtml");
         }
