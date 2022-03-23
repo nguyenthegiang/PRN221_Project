@@ -7,6 +7,11 @@
 @{
     //Get data from ViewBag
     List<Product> products = (List<Product>)ViewBag.Products;
+
+    //for Create Product
+    List<Category> categories = (List<Category>)ViewBag.Categories;
+    int sellerId = ViewBag.SellerId;
+    string sellerName = ViewBag.SellerName;
 }
 
 <!DOCTYPE html>
@@ -26,7 +31,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    
+
     <!--Custom Style-->
     <link rel="stylesheet" href="~/css/ProductManager.css" />
 
@@ -136,17 +141,17 @@
                         <div class="form-group">
                             <label>Category</label>
                             <select name="CategoryID" class="form-control" required>
-                                <c:forEach var="o" items="${listC}">
-                                    <option value="${o.id}">${o.name}</option>
-                                </c:forEach>
+                                @foreach (Category c in categories)
+                                {
+                                    <option value="@c.CategoryId">@c.CategoryName</option>
+                                }
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Seller</label>
                             <select name="SellerID" class="form-control" required>
-                                <c:forEach var="o" items="${listS}">
-                                    <option value="${o.id}">${o.user}</option>
-                                </c:forEach>
+                                <!--Can't change Seller'-->
+                                <option value="@sellerId" selected>@sellerName</option>
                             </select>
                         </div>
                         <div class="form-group">
