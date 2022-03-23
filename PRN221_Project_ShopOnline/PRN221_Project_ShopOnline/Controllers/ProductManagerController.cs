@@ -14,8 +14,16 @@ namespace PRN221_Project_ShopOnline.Controllers
     {
         public IActionResult Index()
         {
+            SetDataToView();
+
+            return View("Views/ProductManager.cshtml");
+        }
+
+        //Make this a different method because there is reuse
+        private void SetDataToView()
+        {
             //Get info of this Seller from Session
-            int sellerId = (int) HttpContext.Session.GetInt32("userId");
+            int sellerId = (int)HttpContext.Session.GetInt32("userId");
             string sellerName = HttpContext.Session.GetString("username");
 
             //Get list products of this Seller for Manage
@@ -32,8 +40,6 @@ namespace PRN221_Project_ShopOnline.Controllers
             //User info for Seller in [Create Product]
             ViewBag.SellerId = sellerId;
             ViewBag.SellerName = sellerName;
-
-            return View("Views/ProductManager.cshtml");
         }
 
         [HttpPost]
@@ -54,14 +60,22 @@ namespace PRN221_Project_ShopOnline.Controllers
 
                 //Add to DB
                 ProductDAO dao = new ProductDAO();
-                dao.AddProduct(product);
-            } catch (Exception ex)
+                bool addResult = dao.AddProduct(product);
+                //if Add fail -> throw exception to notify
+                if (!addResult)
+                {
+                    throw new Exception();
+                }
+            } catch (Exception)
             {
                 //Wrong input -> notify
+                ViewBag.Message = "Wrong input! Please try again";
             }
 
             //Back to Manage Product
-            return Redirect("/ProductManager/Index");
+            SetDataToView();
+
+            return View("Views/ProductManager.cshtml");
         }
     }
 }

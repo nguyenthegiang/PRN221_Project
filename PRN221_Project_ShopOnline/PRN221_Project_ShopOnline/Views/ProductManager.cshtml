@@ -12,6 +12,9 @@
     List<Category> categories = (List<Category>)ViewBag.Categories;
     int sellerId = ViewBag.SellerId;
     string sellerName = ViewBag.SellerName;
+
+    //Message from BackEnd (ex: wrong input when add)
+    string message = ViewBag.Message;
 }
 
 <!DOCTYPE html>
@@ -35,8 +38,15 @@
     <!--Custom Style-->
     <link rel="stylesheet" href="~/css/ProductManager.css" />
 
-    <!--Custom Scrypt-->
+    <!--Custom Script-->
     <script>
+        @*Display Message if has*@
+        if (@message != null) {
+            alert(@message);
+        }
+
+        alert("hi");
+
         function ProductID(PID) {
             document.getElementById("pid").setAttribute("value", PID);
         }

@@ -43,10 +43,21 @@ namespace PRN221_Project_ShopOnline.DAO
             return products;
         }
 
-        public void AddProduct(Product product)
+        //Add 1 Product to DB, return if it is successful
+        public bool AddProduct(Product product)
         {
             context.Products.Add(product);
-            context.SaveChanges();
+            
+            //check if [Add] is successful or not
+            int result = context.SaveChanges();
+
+            if (result < 1)
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
         }
     }
 }
