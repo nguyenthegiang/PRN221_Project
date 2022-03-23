@@ -85,7 +85,7 @@ namespace PRN221_Project_ShopOnline
                 //(Seller) Edit Product
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Default}/{action=FindProductByCategory}/{productId}"
+                    pattern: "{controller=Default}/{action=Index}/{productId}"
                     );
             });
         }

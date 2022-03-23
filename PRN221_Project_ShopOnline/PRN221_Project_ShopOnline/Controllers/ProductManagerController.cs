@@ -78,8 +78,27 @@ namespace PRN221_Project_ShopOnline.Controllers
             return View("Views/ProductManager.cshtml");
         }
 
-        public IActionResult EditProduct(string productId)
+        public IActionResult EditProduct(int productId)
         {
+            //Get info of this Seller from Session
+            int sellerId = (int)HttpContext.Session.GetInt32("userId");
+            string sellerName = HttpContext.Session.GetString("username");
+
+            //Get product to edit
+            ProductDAO productDAO = new ProductDAO();
+            Product product = productDAO.GetProductByID(productId);
+
+            //Get list category for [Edit Product]
+            CategoryDAO categoryDAO = new CategoryDAO();
+            List<Category> categories = categoryDAO.GetAllCategories().ToList();
+
+            //Set data to View
+            ViewBag.Product = product;
+            ViewBag.Categories = categories;
+            //User info for Seller in [Edit Product]
+            ViewBag.SellerId = sellerId;
+            ViewBag.SellerName = sellerName;
+
             return View("Views/EditProduct.cshtml");
         }
     }

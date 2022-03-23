@@ -1,7 +1,15 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@using PRN221_Project_ShopOnline.Models;
+
 @{
+    //Get data from ViewBag
+    Product product = (Product)ViewBag.Product;
+    List<Category> categories = (List<Category>)ViewBag.Categories;
+    int sellerId = ViewBag.SellerId;
+    string sellerName = ViewBag.SellerName;
 }
 
 <!DOCTYPE html>
@@ -41,43 +49,44 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>ID</label>
-                            <input type="text" class="form-control" name="id" value="${id}" readonly>
+                            <input type="text" class="form-control" name="id" value="@product.ProductId" readonly>
                         </div>
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" required name="name" value="${name}">
+                            <input type="text" class="form-control" required name="name" value="@product.ProductName">
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <input type="text" class="form-control" required name="description" value="${description}">
+                            <input type="text" class="form-control" required name="description" value="@product.Description">
                         </div>
                         <div class="form-group">
                             <label>Price</label>
-                            <input type="text" class="form-control" required name="price" value="${price}">
+                            <input type="text" class="form-control" required name="price" value="@product.SellPrice">
                         </div>
                         <div class="form-group">
                             <label>Image Link</label>
-                            <input type="text" class="form-control" required name="imageLink" value="${imageLink}">
+                            <input type="text" class="form-control" required name="imageLink" value="@product.ImageLink">
                         </div>
                         <div class="form-group">
                             <label>Category</label>
+                            @* auto-select the selected value *@
                             <select name="CategoryID" class="form-control" required>
-                                <c:forEach var="o" items="${listC}">
-                                    <option ${TagCategoryID= =o.id ? "selected" : "" } value="${o.id}">${o.name}</option>
-                                </c:forEach>
+                                @foreach (Category c in categories)
+                                {
+                                    <option @(c.CategoryId == product.CategoryId ? "selected" : "") value="@c.CategoryId">@c.CategoryName</option>
+                                }
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Seller</label>
                             <select name="SellerID" class="form-control" required>
-                                <c:forEach var="o" items="${listS}">
-                                    <option ${TagSellerID= =o.id ? "selected" : "" } value="${o.id}">${o.user}</option>
-                                </c:forEach>
+                                <!--Can't change Seller'-->
+                                <option value="@sellerId" selected>@sellerName</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Amount</label>
-                            <input type="text" class="form-control" required name="amount" value="${amount}">
+                            <input type="text" class="form-control" required name="amount" value="@product.Amount">
                         </div>
                     </div>
                     <div class="modal-footer">
