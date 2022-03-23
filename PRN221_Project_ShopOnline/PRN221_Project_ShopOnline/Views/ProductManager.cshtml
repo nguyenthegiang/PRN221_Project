@@ -41,15 +41,10 @@
     <!--Custom Script-->
     <script>
         @*Display Message if has *@
-        if (@message != null) {
-            alert(@message);
+        let message = '@message';
+        if (message != '') {
+            alert(message);
         }
-
-        @*Bug: Nếu chỉ có cái hàm alert như dưới này thì nó vẫn chạy dc, nhưng nếu viết thêm cái hàm alert như trên kia
-            thì nó ko chạy dc (Có thể là vì nó sử dụng dữ liệu từ ViewBag?, vì t thấy thường thì alert sẽ chạy trc khi bất cứ
-            dữ liệu nào dc render trên màn hình). 
-            T debug thử thì dù message có null hay ko thì nó vẫn chạy vào hàm alert (khá là lạ)?*@
-        alert("hi");
 
         function ProductID(PID) {
             document.getElementById("pid").setAttribute("value", PID);
