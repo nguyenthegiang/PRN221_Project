@@ -52,13 +52,16 @@
         function ProductID(PID) {
             document.getElementById("pid").setAttribute("value", PID);
         }
-        function ProductID2(PID) {
-            document.getElementById("pid2").setAttribute("value", PID);
-        }
+
         function search() {
             var searchText = document.getElementById("search_Manager").value;
             location.href = "searchInManager?text=" + searchText;
             return false;
+        }
+
+        //Set Product ID for Delete Product
+        function SetProductIDDelete(PID) {
+            document.getElementById("deleteProductID").setAttribute("value", PID);
         }
     </script>
 </head>
@@ -85,7 +88,9 @@
                             <h2>Manager <b>Product</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
+                                <i class="material-icons">&#xE147;</i> <span>Add New Product</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -113,7 +118,7 @@
                                         <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </a>
                                     <!--Delete Product Link-->
-                                    <a href="#deleteEmployeeModal" onclick="ProductID2(@product.ProductId)" class="delete" data-toggle="modal">
+                                    <a href="#deleteEmployeeModal" onclick="SetProductIDDelete(@product.ProductId)" class="delete" data-toggle="modal">
                                         <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                     </a>
                                 </td>
@@ -185,9 +190,10 @@
     <div id="deleteEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="delete" method="post">
+                <form action="DeleteProduct" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title">Delete Product</h4>
+                        <!--Cancel-->
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -195,8 +201,12 @@
                         <p class="text-warning"><small>This action cannot be undone.</small></p>
                     </div>
                     <div class="modal-footer">
-                        <input type="text" id="pid2" name="ProductID" visibility: hidden>
+                        <!--ProductId to Pass back for Delete-->
+                        <input type="number" id="deleteProductID" name="ProductID" visibility: hidden>
+
+                        <!--Cancel-->
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <!--Submit-->
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </div>
                 </form>
