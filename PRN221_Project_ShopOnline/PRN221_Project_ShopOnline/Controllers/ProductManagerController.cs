@@ -139,9 +139,21 @@ namespace PRN221_Project_ShopOnline.Controllers
 
         //Delet product in DB
         [HttpPost]
-        public IActionResult DeleteProduct(int deleteProductID)
+        public IActionResult DeleteProduct(int ProductID)
         {
-            return null;
+            //Delete in DB
+            ProductDAO dao = new ProductDAO();
+            bool result = dao.DeleteProductById(ProductID);
+            //if Delete fail -> notify
+            if (!result)
+            {
+                ViewBag.Message = "Something went wrong! Please try again";
+            }
+
+            //Back to Manage Product
+            SetDataToView();
+
+            return View("Views/ProductManager.cshtml");
         }
     }
 }
