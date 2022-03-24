@@ -61,21 +61,10 @@ namespace PRN221_Project_ShopOnline.DAO
         }
 
         //Edit Product, return if it is successful or not
-        public bool EditProduct(Product product)
+        public void EditProduct(Product product)
         {
             context.Entry<Product>(product).State = EntityState.Modified;
             context.SaveChanges();
-
-            //check if [Edit] is successful or not
-            int result = context.SaveChanges();
-            if (result < 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
         }
     }
 }

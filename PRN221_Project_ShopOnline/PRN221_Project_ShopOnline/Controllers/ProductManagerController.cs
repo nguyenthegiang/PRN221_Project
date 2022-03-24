@@ -105,10 +105,36 @@ namespace PRN221_Project_ShopOnline.Controllers
 
         //Update Product in DB
         [HttpPost]
-        public IActionResult UpdateProduct()
+        public IActionResult UpdateProduct(int id, string name, string description, int price,
+            string imageLink, int CategoryID, int SellerID, int amount)
         {
-            //todo: update product in db
-            return null;
+            try
+            {
+                //Set data
+                Product product = new Product();
+                product.ProductId = id;
+                product.ProductName = name;
+                product.Description = description;
+                product.SellPrice = price;
+                product.ImageLink = imageLink;
+                product.CategoryId = CategoryID;
+                product.SellerId = SellerID;
+                product.Amount = amount;
+
+                //Update to DB
+                ProductDAO dao = new ProductDAO();
+                dao.EditProduct(product);
+            }
+            catch (Exception)
+            {
+                //Wrong input -> notify
+                ViewBag.Message = "Wrong input! Please try again";
+            }
+
+            //Back to Manage Product
+            SetDataToView();
+
+            return View("Views/ProductManager.cshtml");
         }
     }
 }
