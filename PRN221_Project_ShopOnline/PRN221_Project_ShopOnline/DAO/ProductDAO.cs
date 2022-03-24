@@ -48,13 +48,14 @@ namespace PRN221_Project_ShopOnline.DAO
         public bool AddProduct(Product product)
         {
             context.Products.Add(product);
-            
+
             //check if [Add] is successful or not
             int result = context.SaveChanges();
             if (result < 1)
             {
                 return false;
-            } else
+            }
+            else
             {
                 return true;
             }
@@ -65,6 +66,24 @@ namespace PRN221_Project_ShopOnline.DAO
         {
             context.Entry<Product>(product).State = EntityState.Modified;
             context.SaveChanges();
+        }
+
+        //Delete Product: return false if unsuccessful
+        public bool DeleteProductById(int productId)
+        {
+            Product product = GetProductByID(productId);
+            if (product != null)
+            {
+                context.Products.Remove(product);
+                context.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                //Product not exist
+                return false;
+            }
         }
     }
 }

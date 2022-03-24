@@ -136,5 +136,12 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             return View("Views/ProductManager.cshtml");
         }
+
+        //Delet product in DB
+        [HttpPost]
+        public IActionResult DeleteProduct(int deleteProductID)
+        {
+            return null;
+        }
     }
 }
