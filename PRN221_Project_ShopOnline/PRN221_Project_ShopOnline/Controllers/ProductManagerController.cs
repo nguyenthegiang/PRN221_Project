@@ -43,20 +43,20 @@ namespace PRN221_Project_ShopOnline.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(string name, string description, string price, 
-            string imageLink, string CategoryID, string SellerID, string amount)
+        public IActionResult AddProduct(string name, string description, int price, 
+            string imageLink, int CategoryID, int SellerID, int amount)
         {
             try
             {
-                //Convert data
+                //Set data
                 Product product = new Product();
                 product.ProductName = name;
                 product.Description = description;
-                product.SellPrice = int.Parse(price);
+                product.SellPrice = price;
                 product.ImageLink = imageLink;
-                product.CategoryId = int.Parse(CategoryID);
-                product.SellerId = int.Parse(SellerID);
-                product.Amount = int.Parse(amount);
+                product.CategoryId = CategoryID;
+                product.SellerId = SellerID;
+                product.Amount = amount;
 
                 //Add to DB
                 ProductDAO dao = new ProductDAO();
@@ -104,6 +104,7 @@ namespace PRN221_Project_ShopOnline.Controllers
         }
 
         //Update Product in DB
+        [HttpPost]
         public IActionResult UpdateProduct()
         {
             //todo: update product in db
