@@ -72,20 +72,22 @@
                                     @if (user.IsSeller == 1)
                                     {
                                         <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">
-                                            Seller</a>
+                                            Seller
+                                        </a>
                                     }
                                     @if (user.IsAdmin == 1)
                                     {
                                         <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">
-                                            Admin</a>
+                                            Admin
+                                        </a>
                                     }
                                 </td>
                                 <td>
                                     <a target="blank" href="editAccount?UserID=${o.id}"><button type="button" class="btn btn-outline-info  btn-sm">Edit</button></a>
-                                    <form action="deleteAccount" method="POST" style="display:inline">
+                                    <form action="DeleteAccount" method="POST" style="display:inline">
                                         <a>
                                             <input type="submit" class="btn btn-outline-danger btn-sm" value="Delete" onclick="if (confirm('Are you sure you want to delete?'))
-                                                        form.action = 'deleteAccount?UserID=${o.id}';
+                                                 form.action = 'DeleteAccount?UserId=@user.UserId';
                                                     else
                                                         return false;" />
                                         </a>

@@ -38,5 +38,29 @@ namespace PRN221_Project_ShopOnline.DAO
             List<User> users = context.Users.ToList();
             return users;
         }
+
+        public User GetAccountById(int userId)
+        {
+            User user = context.Users.SingleOrDefault(u => u.UserId == userId);
+            return user;
+        }
+
+        //return false if not successful
+        public bool DeleteAccountById(int userId)
+        {
+            User user = GetAccountById(userId);
+            if (user != null)
+            {
+                context.Users.Remove(user);
+                context.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                //User not exist
+                return false;
+            }
+        }
     }
 }
