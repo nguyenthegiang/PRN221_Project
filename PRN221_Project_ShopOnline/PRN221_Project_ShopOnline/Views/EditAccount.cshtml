@@ -6,7 +6,7 @@
 
 @{
     //Get data
-    User user = (User) ViewBag.User;
+    User user = (User)ViewBag.User;
 }
 
 <!DOCTYPE html>
@@ -34,14 +34,15 @@
 <body>
     @Html.Partial("MenuBar")
 
-    <!-- Edit Account -->
     <div id="editEmployeeModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="editAccount" method="POST">
+                <!-- Edit Account form -->
+                <form action="UpdateAccount" method="POST">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Account</h4>
-                        <a type="button" class="close" href="accountManager" aria-hidden="true">&times;</a>
+                        <!--Cancel: Back to Manage Account-->
+                        <a type="button" class="close" href="/AccountManager/Index" aria-hidden="true">&times;</a>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -50,25 +51,26 @@
                         </div>
                         <div class="form-group">
                             <label>UserName</label>
-                            <input type="text" class="form-control" required name="user" value="@user.Username" readonly>
+                            <input type="text" class="form-control" name="username" value="@user.Username" readonly>
                         </div>
-                        @*<div class="form-group">
+                        <div class="form-group">
                             <label>Password</label>
-                            <input type="text" class="form-control" required name="pass" value="@user.Password">
-                        </div>*@
+                            <input type="password" class="form-control" name="password" value="@user.Password" readonly>
+                        </div>
 
                         <!--Only allow change user role, not user info-->
                         <div class="form-group">
                             <label>Seller</label>
-                            <input type="checkbox" class="form-control" name="Seller" value="1" @(user.IsSeller == 1 ? "checked" : "") style="height: 30px;">
+                            <input type="checkbox" class="form-control" name="IsSeller" value="1" @(user.IsSeller == 1 ? "checked" : "") style="height: 30px;">
                         </div>
                         <div class="form-group">
                             <label>Admin</label>
-                            <input type="checkbox" class="form-control" name="Admin" value="1" @(user.IsSeller == 1 ? "checked" : "") style="height: 30px;">
+                            <input type="checkbox" class="form-control" name="IsAdmin" value="1" @(user.IsAdmin == 1 ? "checked" : "") style="height: 30px;">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a type="button" class="btn btn-default" href="accountManager">Cancel</a>
+                        <!--Cancel: Back to Manage Account-->
+                        <a type="button" class="btn btn-default" href="/AccountManager/Index">Cancel</a>
                         <input type="submit" class="btn btn-info" value="Save">
                     </div>
                 </form>

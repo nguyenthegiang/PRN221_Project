@@ -57,5 +57,34 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             return View("Views/EditAccount.cshtml");
         }
+
+        //Update Account to DB
+        [HttpPost]
+        public IActionResult UpdateAccount(int id, string username, string password, int IsSeller, int IsAdmin)
+        {
+            try
+            {
+                //Set data
+                User user = new User();
+                user.UserId = id;
+                user.Username = username;
+                user.Password = password;
+                user.IsSeller = IsSeller;
+                user.IsAdmin = IsAdmin;
+
+                //Update to DB
+                UserDAO dao = new UserDAO();
+                dao.EditAccount(user);
+            }
+            catch (Exception)
+            {
+                //Wrong input -> notify
+                ViewBag.Message = "Something went wrong! Please try again";
+            }
+
+            //Back to ManageAccount
+            SetDataToView();
+            return View("Views/AccountManager.cshtml");
+        }
     }
 }
