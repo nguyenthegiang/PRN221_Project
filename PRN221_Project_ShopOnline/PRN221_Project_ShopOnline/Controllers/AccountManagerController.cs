@@ -44,5 +44,18 @@ namespace PRN221_Project_ShopOnline.Controllers
             SetDataToView();
             return View("Views/AccountManager.cshtml");
         }
+
+        //Go to Edit Form
+        public IActionResult EditAccount(int UserID)
+        {
+            //Get account to edit
+            UserDAO dao = new UserDAO();
+            User user = dao.GetAccountById(UserID);
+
+            //Set data to view
+            ViewBag.User = user;
+
+            return View("Views/EditAccount.cshtml");
+        }
     }
 }
