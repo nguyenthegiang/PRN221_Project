@@ -28,8 +28,18 @@ namespace PRN221_Project_ShopOnline.Controllers
             ViewBag.Users = users;
         }
 
+        [HttpPost]
         public IActionResult DeleteAccount(int UserId)
         {
+            //Delete
+            UserDAO dao = new UserDAO();
+            bool result = dao.DeleteAccountById(UserId);
+            //if delete fail -> notify
+            if (!result)
+            {
+                ViewBag.Message = "Something went wrong! Please try again";
+            }
+
             //Back to ManageAccount
             SetDataToView();
             return View("Views/AccountManager.cshtml");

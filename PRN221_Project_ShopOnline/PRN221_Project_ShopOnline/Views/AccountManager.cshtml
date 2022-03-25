@@ -7,6 +7,9 @@
 @{
     //Get data
     List<User> users = (List<User>)ViewBag.Users;
+
+    //Message from BackEnd
+    string message = ViewBag.Message;
 }
 
 <!DOCTYPE html>
@@ -33,6 +36,12 @@
 
     <!--Custom Script-->
     <script>
+        @*Display Message if has *@
+        let message = '@message';
+        if (message != '') {
+            alert(message);
+        }
+
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
@@ -41,7 +50,7 @@
 <body>
     @Html.Partial("MenuBar")
 
-    <div class="container-xl" style="position: fixed; right: 100px;">
+    <div class="container-xl">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
