@@ -61,7 +61,7 @@ namespace PRN221_Project_ShopOnline.DAO
             }
         }
 
-        //Edit Product, return if it is successful or not
+        //Edit Product
         public void EditProduct(Product product)
         {
             context.Entry<Product>(product).State = EntityState.Modified;

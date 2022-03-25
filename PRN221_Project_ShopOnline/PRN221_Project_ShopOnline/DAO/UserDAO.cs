@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using PRN221_Project_ShopOnline.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PRN221_Project_ShopOnline.DAO
 {
@@ -61,6 +62,13 @@ namespace PRN221_Project_ShopOnline.DAO
                 //User not exist
                 return false;
             }
+        }
+
+        //Edit account
+        public void EditAccount(User user)
+        {
+            context.Entry<User>(user).State = EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }
