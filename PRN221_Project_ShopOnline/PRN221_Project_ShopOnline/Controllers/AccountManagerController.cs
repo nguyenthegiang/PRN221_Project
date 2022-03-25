@@ -60,14 +60,14 @@ namespace PRN221_Project_ShopOnline.Controllers
 
         //Update Account to DB
         [HttpPost]
-        public IActionResult UpdateAccount(int id, string username, string password, int IsSeller, int IsAdmin)
+        public IActionResult UpdateAccount(int id, string email, string password, int IsSeller, int IsAdmin)
         {
             try
             {
                 //Set data
                 User user = new User();
                 user.UserId = id;
-                user.Username = username;
+                user.Email = email;
                 user.Password = password;
                 user.IsSeller = IsSeller;
                 user.IsAdmin = IsAdmin;
