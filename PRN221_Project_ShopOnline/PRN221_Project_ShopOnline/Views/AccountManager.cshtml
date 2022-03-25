@@ -1,7 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@using PRN221_Project_ShopOnline.Models;
+
 @{
+    //Get data
+    List<User> users = (List<User>)ViewBag.Users;
 }
 
 <!DOCTYPE html>
@@ -58,17 +63,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list}" var="o">
+                        @foreach (User user in users)
+                        {
                             <tr>
-                                <td>${o.id}</td>
-                                <td><a href="#">${o.user}</a></td>
+                                <td>@user.UserId</td>
+                                <td><a href="#">@user.Username</a></td>
                                 <td style="width: 200px;">
-                                    <c:if test="${o.isSell==1}">
-                                        <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Seller</a>
-                                    </c:if>
-                                    <c:if test="${o.isAdmin==1}">
-                                        <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Admin</a>
-                                    </c:if>
+                                    @if (user.IsSeller == 1)
+                                    {
+                                        <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">
+                                            Seller</a>
+                                    }
+                                    @if (user.IsAdmin == 1)
+                                    {
+                                        <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">
+                                            Admin</a>
+                                    }
                                 </td>
                                 <td>
                                     <a target="blank" href="editAccount?UserID=${o.id}"><button type="button" class="btn btn-outline-info  btn-sm">Edit</button></a>
@@ -82,7 +92,7 @@
                                     </form>
                                 </td>
                             </tr>
-                        </c:forEach>
+                        }
                     </tbody>
                 </table>
             </div>
