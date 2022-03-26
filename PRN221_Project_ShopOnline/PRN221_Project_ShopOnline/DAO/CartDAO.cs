@@ -37,7 +37,7 @@ namespace PRN221_Project_ShopOnline.DAO
             List<Cart> carts = GetCartsOfUser(UserId);
             foreach(Cart cart in carts)
             {
-                if (cart.Product.ProductId == ProductId)
+                if (cart.ProductId == ProductId)
                 {
                     //increase amount
                     context = new ElectronicShopPRN221Context();
