@@ -37,6 +37,8 @@
         let message = '@addToCartMessage';
         if (message != '') {
             alert(message);
+            //Back to Home Page
+            window.location.href = "/";
         }
     </script>
 </head>
@@ -83,12 +85,12 @@
                     {
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="card" style="width: 18rem;">
-                                <a href="productDetail?ProductID=@product.ProductId">
+                                <a href="/ProductDetail/Index?ProductID=@product.ProductId">
                                     <img src="/image/@product.ImageLink" class="card-img-top" alt="...">
                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        <a href="productDetail?ProductID=@product.ProductId" title="View Product">@product.ProductName</a>
+                                        <a href="/ProductDetail/Index?ProductID=@product.ProductId" title="View Product">@product.ProductName</a>
                                     </h5>
                                     <p class="card-text">@product.GetPriceWithDot()</p>
                                     <a href="/Cart/AddToCart?ProductId=@product.ProductId" class="btn btn-primary">Add to Cart</a>
