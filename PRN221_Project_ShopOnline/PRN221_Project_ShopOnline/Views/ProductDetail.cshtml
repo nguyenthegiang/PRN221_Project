@@ -48,7 +48,6 @@
                             </article> <!-- gallery-wrap .end// -->
                         </aside>
                         <aside class="col-sm-7">
-                            @*<h3 style="color: red">${message}</h3>*@
                             <article class="card-body p-5">
                                 <h3 class="title mb-3">@product.ProductName</h3>
 
@@ -67,23 +66,33 @@
                                 </dl>
 
                                 <hr>
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <dl class="param param-inline">
-                                            <dt>Quantity: </dt>
-                                            <dd>
-                                                <select class="form-select" style="width:70px;" id="select_id">
-                                                    @for (int i = 0; i < 10; i++)
-                                                    {
-                                                        <option value="@i"> @i </option>
-                                                    }
-                                                </select>
-                                            </dd>
-                                        </dl>  <!-- item-property .// -->
-                                    </div> <!-- col.// -->
-                                </div> <!-- row.// -->
-                                <hr>
-                                <button class="btn btn-lg btn-outline-info text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </button>
+
+                                <!--Add Many To Cart-->
+                                <form action="ProductDetail/AddManyToCart" method="post">
+                                    <!--ProductId (for add to cart)-->
+                                    <input type="hidden" name="ProductId" value="@product.ProductId"/>
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <dl class="param param-inline">
+                                                <dt>Quantity: </dt>
+                                                <dd>
+                                                    <!--Amount-->
+                                                    <select name="Amount" class="form-select" style="width:70px;" id="select_id">
+                                                        @for (int i = 0; i < 10; i++)
+                                                        {
+                                                            <option value="@i"> @i </option>
+                                                        }
+                                                    </select>
+                                                </dd>
+                                            </dl>  <!-- item-property .// -->
+                                        </div> <!-- col.// -->
+                                    </div> <!-- row.// -->
+                                    <hr>
+                                    <button type="submit" class="btn btn-lg btn-outline-info text-uppercase">
+                                        <i class="fas fa-shopping-cart"></i> Add to cart
+                                    </button>
+                                </form>
+
                             </article> <!-- card-body.// -->
                         </aside> <!-- col.// -->
                     </div> <!-- row.// -->
