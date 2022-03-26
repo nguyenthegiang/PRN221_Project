@@ -74,6 +74,8 @@ namespace PRN221_Project_ShopOnline.DAO
             Product product = GetProductByID(productId);
             if (product != null)
             {
+                //Before remove: remove all orderDetails & Carts of this Product
+
                 context.Products.Remove(product);
                 context.SaveChanges();
 
