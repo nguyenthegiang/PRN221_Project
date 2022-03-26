@@ -20,14 +20,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <!--Cart-->
-                    <a class="btn btn-info" href="show">
-                        <i class="fa fa-shopping-cart"></i> Cart
-                        <span class="badge bg-secondary" id="CartNum">5</span>
-                    </a>
-                </li>
-
                 <!--Login: only show if user is not login -> check Session-->
                 @if (httpContextAccessor.HttpContext.Session.GetString("userId") == null)
                 {
@@ -37,6 +29,14 @@
                 }
                 else
                 {
+                    <li class="nav-item">
+                        <!--Cart-->
+                        <a class="btn btn-info" href="/Cart/Index">
+                            <i class="fa fa-shopping-cart"></i> Cart
+                            @*<span class="badge bg-secondary" id="CartNum">5</span>*@
+                        </a>
+                    </li>
+
                     //if user is login
                     //show Message
                     <li class="nav-item">

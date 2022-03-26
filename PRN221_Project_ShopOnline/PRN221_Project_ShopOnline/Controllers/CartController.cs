@@ -13,9 +13,28 @@ namespace PRN221_Project_ShopOnline.Controllers
 {
     public class CartController : Controller
     {
+        //Show List Cart
         public IActionResult Index()
         {
-            return View();
+            //Get user Id fron Session
+            int UserId = (int)HttpContext.Session.GetInt32("userId");
+
+            //Get list Cart from DB
+            CartDAO dao = new CartDAO();
+            List<Cart> carts = dao.GetCartsOfUser(UserId);
+
+            //count total Price
+            int totalPrice = 0;
+            foreach (Cart cart in carts)
+            {
+                totalPrice += (int)cart.Product.SellPrice * (int)cart.Amount;
+            }
+
+            //set data to View
+            ViewBag.Carts = carts;
+            ViewBag.TotalPrice = totalPrice;
+
+            return View("Views/ShowCart.cshtml");
         }
         
         //Add 1 Product to Cart (Amount=1) {From: Home}
