@@ -15,12 +15,16 @@ namespace PRN221_Project_ShopOnline.DAO
         /*-------------Customer-------------*/
         public User Login(string username, string password)
         {
+            context = new ElectronicShopPRN221Context();
+
             User user = context.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
             return user;
         }
 
         public void SignUp(string username, string password, string email)
         {
+            context = new ElectronicShopPRN221Context();
+
             User user = new User();
             user.Username = username;
             user.Password = password;
@@ -36,12 +40,16 @@ namespace PRN221_Project_ShopOnline.DAO
         /*-------------Admin-------------*/
         public IEnumerable<User> GetAllAccounts()
         {
+            context = new ElectronicShopPRN221Context();
+
             List<User> users = context.Users.ToList();
             return users;
         }
 
         public User GetAccountById(int userId)
         {
+            context = new ElectronicShopPRN221Context();
+
             User user = context.Users.SingleOrDefault(u => u.UserId == userId);
             return user;
         }
@@ -49,6 +57,8 @@ namespace PRN221_Project_ShopOnline.DAO
         //return false if not successful
         public bool DeleteAccountById(int userId)
         {
+            context = new ElectronicShopPRN221Context();
+
             User user = GetAccountById(userId);
             if (user != null)
             {
@@ -67,6 +77,8 @@ namespace PRN221_Project_ShopOnline.DAO
         //Edit account
         public void EditAccount(User user)
         {
+            context = new ElectronicShopPRN221Context();
+
             context.Entry<User>(user).State = EntityState.Modified;
             context.SaveChanges();
         }

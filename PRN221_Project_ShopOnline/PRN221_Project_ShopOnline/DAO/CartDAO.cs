@@ -22,9 +22,9 @@ namespace PRN221_Project_ShopOnline.DAO
 
         /*Function returns a boolean to inform whether the product is added to cart or not
         (product out of stock -> add fail)*/
-/*        public bool AddToCart(int UserId, int ProductId, int Amount)
+        public bool AddToCart(int UserId, int ProductId, int Amount)
         {
 
-        }*/
+        }
     }
 }

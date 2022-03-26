@@ -15,24 +15,32 @@ namespace PRN221_Project_ShopOnline.DAO
         /*-------------Customer-------------*/
         public IEnumerable<Product> GetAllProducts()
         {
+            context = new ElectronicShopPRN221Context();
+
             IEnumerable<Product> products = context.Products.ToList();
             return products;
         }
 
         public Product GetProductByID(int Id)
         {
+            context = new ElectronicShopPRN221Context();
+
             Product product = context.Products.SingleOrDefault(p => p.ProductId == Id);
             return product;
         }
 
         public IEnumerable<Product> GetProductsByCategory(int CateId)
         {
+            context = new ElectronicShopPRN221Context();
+
             IEnumerable<Product> products = context.Products.Where(p => p.CategoryId == CateId).ToList();
             return products;
         }
 
         public IEnumerable<Product> SearchProductByName(string productName)
         {
+            context = new ElectronicShopPRN221Context();
+
             IEnumerable<Product> products = context.Products.Where(p => p.ProductName.Contains(productName)).ToList();
             return products;
         }
@@ -40,6 +48,8 @@ namespace PRN221_Project_ShopOnline.DAO
         /*-------------Seller-------------*/
         public IEnumerable<Product> GetProductsBySeller(int SellerId)
         {
+            context = new ElectronicShopPRN221Context();
+
             IEnumerable<Product> products = context.Products.Where(p => p.SellerId == SellerId).ToList();
             return products;
         }
@@ -47,6 +57,8 @@ namespace PRN221_Project_ShopOnline.DAO
         //Add 1 Product to DB, return if it is successful or not
         public bool AddProduct(Product product)
         {
+            context = new ElectronicShopPRN221Context();
+
             context.Products.Add(product);
 
             //check if [Add] is successful or not
@@ -64,6 +76,8 @@ namespace PRN221_Project_ShopOnline.DAO
         //Edit Product
         public void EditProduct(Product product)
         {
+            context = new ElectronicShopPRN221Context();
+
             context.Entry<Product>(product).State = EntityState.Modified;
             context.SaveChanges();
         }
@@ -71,6 +85,8 @@ namespace PRN221_Project_ShopOnline.DAO
         //Delete Product: return false if unsuccessful
         public bool DeleteProductById(int productId)
         {
+            context = new ElectronicShopPRN221Context();
+
             Product product = GetProductByID(productId);
             if (product != null)
             {
@@ -92,6 +108,8 @@ namespace PRN221_Project_ShopOnline.DAO
         //Count the amount of a product to see if it is out of stock: used for AddToCart()
         public int CountAmountOfProduct(int ProductId)
         {
+            context = new ElectronicShopPRN221Context();
+
             Product product = context.Products.SingleOrDefault(p => p.ProductId == ProductId);
             return (int)product.Amount;
         }
@@ -99,6 +117,8 @@ namespace PRN221_Project_ShopOnline.DAO
         //Minus 1 Amount from Product (used after 1 Customer Add to Cart)
         public void Delete1AmountOfProduct(int ProductId)
         {
+            context = new ElectronicShopPRN221Context();
+
             //Find Product
             Product product = GetProductByID(ProductId);
 
