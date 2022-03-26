@@ -9,6 +9,7 @@ namespace PRN221_Project_ShopOnline.Models
     {
         public User()
         {
+            Carts = new HashSet<Cart>();
             Orders = new HashSet<Order>();
             Products = new HashSet<Product>();
             UserAddresses = new HashSet<UserAddress>();
@@ -21,6 +22,7 @@ namespace PRN221_Project_ShopOnline.Models
         public int? IsSeller { get; set; }
         public int? IsAdmin { get; set; }
 
+        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<UserAddress> UserAddresses { get; set; }

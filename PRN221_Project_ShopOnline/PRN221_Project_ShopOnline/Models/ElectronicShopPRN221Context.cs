@@ -48,22 +48,24 @@ namespace PRN221_Project_ShopOnline.Models
 
             modelBuilder.Entity<Cart>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.UserId, e.ProductId });
 
                 entity.ToTable("Cart");
 
-                entity.Property(e => e.ProductId).HasColumnName("ProductID");
-
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
                 entity.HasOne(d => d.Product)
-                    .WithMany()
+                    .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("productID_in_product");
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("userID_in_user");
             });
 
@@ -215,7 +217,7 @@ namespace PRN221_Project_ShopOnline.Models
             modelBuilder.Entity<ProductStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__ProductS__C8EE20432A3DF5C5");
+                    .HasName("PK__ProductS__C8EE2043BFCEF0DD");
 
                 entity.ToTable("ProductStatus");
 

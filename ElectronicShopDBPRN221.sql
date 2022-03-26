@@ -222,7 +222,8 @@ VALUES (N'© 2020 Công Ty Cổ Phần Máy Tính Computer ERA', N'Số 129 + 13
 CREATE TABLE Cart (
 	UserID int,
 	ProductID int,
-	Amount int
+	Amount int,
+	CONSTRAINT PK_Cart PRIMARY KEY (UserID,ProductID),
 	constraint userID_in_user FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint productID_in_product FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
 ) ON [PRIMARY]

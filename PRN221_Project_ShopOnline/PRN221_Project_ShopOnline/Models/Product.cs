@@ -9,6 +9,7 @@ namespace PRN221_Project_ShopOnline.Models
     {
         public Product()
         {
+            Carts = new HashSet<Cart>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
@@ -32,13 +33,14 @@ namespace PRN221_Project_ShopOnline.Models
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual User Seller { get; set; }
         public virtual ProductStatus Status { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
         /*Function to write the Product's Price in proper form:
         Example: 1.000.000*/
         public String GetPriceWithDot()
         {
-            int price = (int) SellPrice;
+            int price = (int)SellPrice;
             return price.ToString("N0");
         }
     }
