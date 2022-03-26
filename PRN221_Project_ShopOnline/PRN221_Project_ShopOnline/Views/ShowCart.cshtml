@@ -1,7 +1,13 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@using PRN221_Project_ShopOnline.Models;
+
 @{
+    //Get data
+    List<Cart> carts = (List<Cart>)ViewBag.Carts;
+    String totalPrice = ViewBag.TotalPrice; 
 }
 
 <!DOCTYPE html>
@@ -40,21 +46,23 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${list}" var="o">
+                @foreach (Cart cart in carts)
+                {
                     <tr>
-                        <th scope="row">${o.p.id}</th>
-                        <td>${o.p.name}</td>
-                        <td><img src="image/${o.p.imageLink}"></td>
-                        <td>${o.p.priceWithDot} VND</td>
-                        <td>${o.amount}</td>
-                        <td><a href="deleteProductInCart?ProductID=${o.p.id}" type="button" class="btn btn-outline-info">Delete</a></td>
+                        <th scope="row">@cart.Product.ProductId</th>
+                        <td>@cart.Product.ProductName</td>
+                        <td><img src="/image/@cart.Product.ImageLink"></td>
+                        <td>@cart.Product.GetPriceWithDot() VND</td>
+                        <td>@cart.Amount</td>
+                        <td><a href="deleteProductInCart?ProductID=@cart.Product.ProductId" type="button" class="btn btn-outline-info">
+                            Delete</a></td>
                     </tr>
-                </c:forEach>
+                }
             </tbody>
         </table>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <button type="button" class="btn btn-warning">Total</button>
-            <button type="button" class="btn btn-outline-primary">${total} VND</button>
+            <button type="button" class="btn btn-outline-primary">@totalPrice VND</button>
         </div>
         <div>&emsp;</div>
         <div><a type="button" href="buy" class="btn btn-info btn-lg">Pay</a></div>
