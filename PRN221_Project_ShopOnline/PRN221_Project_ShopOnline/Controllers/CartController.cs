@@ -25,7 +25,16 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             /*----------Add To Cart----------*/
             //Use Session to get user id
-            int UserId = (int)HttpContext.Session.GetInt32("userId");
+            int UserId = 0;
+            try
+            {
+                UserId = (int)HttpContext.Session.GetInt32("userId");
+            } catch (Exception)
+            {
+                //If Exception -> User is not Login (can't add to cart) -> go to Login Page
+                return Redirect("/Login/Index");
+            }
+            
 
             //Add to DB (amount = 1)
             CartDAO cartDAO = new CartDAO();

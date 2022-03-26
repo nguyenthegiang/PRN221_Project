@@ -13,6 +13,9 @@
     List<Category> categories = (List<Category>)ViewBag.Categories;
     List<Product> products = (List<Product>)ViewBag.Products;
     int selectedCategory = ViewBag.SelectedCategory;
+
+    //Message from Add to Cart (if has)
+    string addToCartMessage = ViewBag.AddToCartMessage;
 }
 
 <!DOCTYPE html>
@@ -27,6 +30,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!--Custom Style-->
     <link rel="stylesheet" href="~/css/Index.css" />
+
+    <!--Custom Script-->
+    <script>
+        @*Display Message if has *@
+        let message = '@addToCartMessage';
+        if (message != '') {
+            alert(message);
+        }
+    </script>
 </head>
 <body>
     <!--Menu-->
