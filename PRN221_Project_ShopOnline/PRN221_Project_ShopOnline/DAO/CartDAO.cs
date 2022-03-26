@@ -10,7 +10,7 @@ namespace PRN221_Project_ShopOnline.DAO
 {
     public class CartDAO
     {
-        private readonly ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
+        private ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
 
         /*-------------Customer-------------*/
         //Get all Cart Items of 1 User
@@ -18,13 +18,6 @@ namespace PRN221_Project_ShopOnline.DAO
         {
             List<Cart> carts = context.Carts.Where(c => c.UserId == UserId).ToList();
             return carts;
-        }
-
-        //Count the amount of a product to see if it is out of stock: used for AddToCart()
-        public int countAmountOfProduct(int ProductId)
-        {
-            Product product = context.Products.SingleOrDefault(p => p.ProductId == ProductId);
-            return (int)product.Amount;
         }
 
         /*Function returns a boolean to inform whether the product is added to cart or not

@@ -10,7 +10,7 @@ namespace PRN221_Project_ShopOnline.DAO
 {
     public class UserDAO
     {
-        private readonly ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
+        private ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
 
         /*-------------Customer-------------*/
         public User Login(string username, string password)

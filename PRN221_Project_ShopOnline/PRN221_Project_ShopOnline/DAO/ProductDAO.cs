@@ -10,7 +10,7 @@ namespace PRN221_Project_ShopOnline.DAO
 {
     public class ProductDAO
     {
-        private readonly ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
+        private ElectronicShopPRN221Context context = new ElectronicShopPRN221Context();
 
         /*-------------Customer-------------*/
         public IEnumerable<Product> GetAllProducts()
@@ -86,6 +86,26 @@ namespace PRN221_Project_ShopOnline.DAO
                 //Product not exist
                 return false;
             }
+        }
+
+        /*-------------For [CartDAO]-------------*/
+        //Count the amount of a product to see if it is out of stock: used for AddToCart()
+        public int CountAmountOfProduct(int ProductId)
+        {
+            Product product = context.Products.SingleOrDefault(p => p.ProductId == ProductId);
+            return (int)product.Amount;
+        }
+
+        //Minus 1 Amount from Product (used after 1 Customer Add to Cart)
+        public void Delete1AmountOfProduct(int ProductId)
+        {
+            //Find Product
+            Product product = GetProductByID(ProductId);
+
+            //Update Product Amount
+            product.Amount--;
+            context = new ElectronicShopPRN221Context();
+            EditProduct(product);
         }
     }
 }
