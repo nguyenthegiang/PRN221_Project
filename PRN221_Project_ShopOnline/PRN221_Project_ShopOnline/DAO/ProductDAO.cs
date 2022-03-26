@@ -117,14 +117,11 @@ namespace PRN221_Project_ShopOnline.DAO
         //Minus Amount from Product (used after 1 Customer Add to Cart)
         public void DeleteAmountOfProduct(int ProductId, int Amount)
         {
-            context = new ElectronicShopPRN221Context();
-
             //Find Product
             Product product = GetProductByID(ProductId);
 
             //Update Product Amount
             product.Amount -= Amount;
-            context = new ElectronicShopPRN221Context();
             EditProduct(product);
         }
     }
