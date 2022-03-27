@@ -51,7 +51,11 @@
                 {
                     <tr>
                         <th scope="row">@cart.Product.ProductId</th>
-                        <td>@cart.Product.ProductName</td>
+                        <td>
+                            <a href="/ProductDetail/Index?ProductID=@cart.ProductId">
+                                @cart.Product.ProductName
+                            </a>
+                        </td>
                         <td><img src="/image/@cart.Product.ImageLink"></td>
                         <td>@cart.Product.GetPriceWithDot() VND</td>
                         <td>@cart.Amount</td>
