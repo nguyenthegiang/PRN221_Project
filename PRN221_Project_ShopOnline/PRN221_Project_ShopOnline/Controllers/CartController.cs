@@ -193,5 +193,14 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             return View("Views/Buy.cshtml");
         }
+
+        //---------------Finish---------------
+/*        public IActionResult Finish()
+        {
+            //todo: add Cart to Order
+
+            //Delete Cart
+
+        }*/
     }
 }
