@@ -147,10 +147,44 @@ namespace PRN221_Project_ShopOnline.Controllers
             return view;
         }
 
-/*        //---------------Buy---------------
+        //---------------Buy---------------
         public IActionResult Buy()
         {
+            /*Get data*/
+            //id of user from session
+            int UserId = (int)HttpContext.Session.GetInt32("userId");
 
-        }*/
+            //list cart
+            CartDAO cartDAO = new CartDAO();
+            List<Cart> carts = cartDAO.GetCartsOfUser(UserId);
+
+            //if doesn't have any item in cart => back to Show Cart
+            if (carts.Count == 0)
+            {
+                return Redirect("/Cart/Index");
+            }
+
+            //ship info
+            ShipDAO shipDAO = new ShipDAO();
+            List<Ship> ships = shipDAO.GetAllShips();
+
+            //Count total price
+            int totalPrice = 0;
+            foreach (Cart cart in carts)
+            {
+                //find the Product of each Cart for display
+                ProductDAO productDAO = new ProductDAO();
+                cart.Product = productDAO.GetProductByID(cart.ProductId);
+
+                totalPrice += (int)cart.Product.SellPrice * (int)cart.Amount;
+            }
+
+            //set to view
+            ViewBag.Carts = carts;
+            ViewBag.Ships = ships;
+            ViewBag.TotalPrice = totalPrice;
+
+            return View("Views/Buy.cshtml");
+        }
     }
 }
