@@ -195,12 +195,19 @@ namespace PRN221_Project_ShopOnline.Controllers
         }
 
         //---------------Finish---------------
-/*        public IActionResult Finish()
+        [HttpPost]
+        public IActionResult Finish()
         {
-            //todo: add Cart to Order
+            /*todo: add Cart to Order*/
 
-            //Delete Cart
+            /*Delete Cart*/
+            //Get user from session
+            int UserId = (int)HttpContext.Session.GetInt32("userId");
+            //delete
+            CartDAO cartDAO = new CartDAO();
+            cartDAO.DeleteCart(UserId);
 
-        }*/
+            return View("Views/Finish.cshtml");
+        }
     }
 }
