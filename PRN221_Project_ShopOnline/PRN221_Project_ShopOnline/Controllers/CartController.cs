@@ -146,5 +146,11 @@ namespace PRN221_Project_ShopOnline.Controllers
 
             return view;
         }
+
+/*        //---------------Buy---------------
+        public IActionResult Buy()
+        {
+
+        }*/
     }
 }
