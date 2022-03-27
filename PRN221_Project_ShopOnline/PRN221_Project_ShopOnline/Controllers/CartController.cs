@@ -161,6 +161,15 @@ namespace PRN221_Project_ShopOnline.Controllers
             return Redirect("/Cart/Index");
         }
 
+        //Delete 1 Item in Cart of 1 User
+/*        public IActionResult DeleteProductInCart(int ProductID)
+        {
+            //id of user from session
+            int UserId = (int)HttpContext.Session.GetInt32("userId");
+
+
+        }
+*/
         //---------------Buy---------------
         public IActionResult Buy()
         {

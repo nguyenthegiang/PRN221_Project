@@ -81,5 +81,15 @@ namespace PRN221_Project_ShopOnline.DAO
             context.Carts.RemoveRange(carts);
             context.SaveChanges();
         }
+
+        //Delete 1 Item in Cart of 1 User
+        public void DeleteProductInCart(int UserId, int ProductId)
+        {
+            context = new ElectronicShopPRN221Context();
+
+            Cart cart = context.Carts.SingleOrDefault(c => c.UserId == UserId && c.ProductId == ProductId);
+            context.Carts.Remove(cart);
+            context.SaveChanges();
+        }
     }
 }
