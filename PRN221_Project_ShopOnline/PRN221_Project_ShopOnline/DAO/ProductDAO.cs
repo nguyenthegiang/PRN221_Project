@@ -92,6 +92,8 @@ namespace PRN221_Project_ShopOnline.DAO
             {
                 //Before remove: remove all orderDetails & Carts of this Product
 
+
+                //Remove Product
                 context.Products.Remove(product);
                 context.SaveChanges();
 
