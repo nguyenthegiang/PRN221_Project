@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PRN221_Project_ShopOnline.Models;
 using PRN221_Project_ShopOnline.DAO;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace PRN221_Project_ShopOnline.Controllers
 {
@@ -44,16 +45,24 @@ namespace PRN221_Project_ShopOnline.Controllers
 
         [HttpPost]
         public IActionResult AddProduct(string name, string description, int price, 
-            string imageLink, int CategoryID, int SellerID, int amount)
+            IFormFile image, int CategoryID, int SellerID, int amount)
         {
             try
             {
+                //Copy Image file to Project Folder
+                string filename = Path.Combine
+                    (@"D:\Study\Semester7\PRN221\Project\PRN221_Project\PRN221_Project_ShopOnline\PRN221_Project_ShopOnline\wwwroot\image", image.FileName);
+                using (var fs = new FileStream(filename, FileMode.Create))
+                {
+                    image.CopyTo(fs);
+                }
+
                 //Set data
                 Product product = new Product();
                 product.ProductName = name;
                 product.Description = description;
                 product.SellPrice = price;
-                product.ImageLink = imageLink;
+                product.ImageLink = image.FileName;
                 product.CategoryId = CategoryID;
                 product.SellerId = SellerID;
                 product.Amount = amount;
