@@ -4,6 +4,7 @@ using PRN221_Project_ShopOnline.DAO;
 using PRN221_Project_ShopOnline.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace PRN221_Project_ShopOnline.Controllers
 {
@@ -39,7 +40,7 @@ namespace PRN221_Project_ShopOnline.Controllers
                      group h by new { h.ProductId } into hh
                      select new OrderDetail
                      {
-                         ProductId = hh.Key.ProductId,                        
+                         ProductId = hh.Key.ProductId,
                          Quantity = hh.Sum(s => s.Quantity)
                      }).OrderByDescending(i => i.Quantity).ToList<OrderDetail>();
             List<int> a = new List<int>();
@@ -47,8 +48,25 @@ namespace PRN221_Project_ShopOnline.Controllers
             {
                 a.Add(q[i].ProductId);
             }
-            List<Product> products = (List<Product>)context.Products.Where(p => a.Contains(p.ProductId)).ToList();
-            ViewBag.MostSellProd = products;
+            List<Product> mostSellProducts = (List<Product>)context.Products.Where(p => a.Contains(p.ProductId)).ToList();
+            ViewBag.MostSellProd = mostSellProducts;
+
+            // count prod by cate
+            var prodCat = (from h in context.Products
+                           group h by new { h.CategoryId } into hh
+                           select new Product
+                           {
+                               CategoryId = hh.Key.CategoryId,
+                               Amount = hh.Count()
+                           }).ToList<Product>();
+            
+            foreach (Product prod in prodCat)
+            {
+                prod.ProductName = context.Categories.FirstOrDefault(c => c.CategoryId == prod.CategoryId).CategoryName;
+                
+            }
+           
+            ViewBag.ProdPerCate = prodCat;
 
         }
     }
