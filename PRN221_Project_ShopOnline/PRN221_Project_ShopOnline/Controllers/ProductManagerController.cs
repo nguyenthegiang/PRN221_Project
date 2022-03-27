@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using PRN221_Project_ShopOnline.Models;
 using PRN221_Project_ShopOnline.DAO;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace PRN221_Project_ShopOnline.Controllers
 {
@@ -44,16 +46,27 @@ namespace PRN221_Project_ShopOnline.Controllers
 
         [HttpPost]
         public IActionResult AddProduct(string name, string description, int price, 
-            string imageLink, int CategoryID, int SellerID, int amount)
+            IFormFile image, int CategoryID, int SellerID, int amount)
         {
             try
             {
+                //Get Image Path from JSON
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                string rootdir = config.GetSection("ImageRootPath").Value.ToString();
+
+                //Copy Image file to Project Folder
+                string filename = Path.Combine(rootdir, image.FileName);
+                using (var fs = new FileStream(filename, FileMode.Create))
+                {
+                    image.CopyTo(fs);
+                }
+
                 //Set data
                 Product product = new Product();
                 product.ProductName = name;
                 product.Description = description;
                 product.SellPrice = price;
-                product.ImageLink = imageLink;
+                product.ImageLink = image.FileName;
                 product.CategoryId = CategoryID;
                 product.SellerId = SellerID;
                 product.Amount = amount;
@@ -106,24 +119,60 @@ namespace PRN221_Project_ShopOnline.Controllers
         //Update Product in DB
         [HttpPost]
         public IActionResult UpdateProduct(int id, string name, string description, int price,
-            string imageLink, int CategoryID, int SellerID, int amount)
+            IFormFile image, int CategoryID, int SellerID, int amount)
         {
             try
             {
-                //Set data
-                Product product = new Product();
-                product.ProductId = id;
-                product.ProductName = name;
-                product.Description = description;
-                product.SellPrice = price;
-                product.ImageLink = imageLink;
-                product.CategoryId = CategoryID;
-                product.SellerId = SellerID;
-                product.Amount = amount;
+                //if user does not change image -> Keep old image
+                if (image == null)
+                {
+                    //Get old product
+                    ProductDAO productDAO = new ProductDAO();
+                    Product oldProduct = productDAO.GetProductByID(id);
 
-                //Update to DB
-                ProductDAO dao = new ProductDAO();
-                dao.EditProduct(product);
+                    //Set data
+                    Product product = new Product();
+                    product.ProductId = id;
+                    product.ProductName = name;
+                    product.Description = description;
+                    product.SellPrice = price;
+                    product.ImageLink = oldProduct.ImageLink;   //not change image
+                    product.CategoryId = CategoryID;
+                    product.SellerId = SellerID;
+                    product.Amount = amount;
+
+                    //Update to DB
+                    ProductDAO dao = new ProductDAO();
+                    dao.EditProduct(product);
+                }
+                else
+                {
+                    //Get Image Path from JSON
+                    var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                    string rootdir = config.GetSection("ImageRootPath").Value.ToString();
+
+                    //Copy Image file to Project Folder
+                    string filename = Path.Combine(rootdir, image.FileName);
+                    using (var fs = new FileStream(filename, FileMode.Create))
+                    {
+                        image.CopyTo(fs);
+                    }
+
+                    //Set data
+                    Product product = new Product();
+                    product.ProductId = id;
+                    product.ProductName = name;
+                    product.Description = description;
+                    product.SellPrice = price;
+                    product.ImageLink = image.FileName;
+                    product.CategoryId = CategoryID;
+                    product.SellerId = SellerID;
+                    product.Amount = amount;
+
+                    //Update to DB
+                    ProductDAO dao = new ProductDAO();
+                    dao.EditProduct(product);
+                }
             }
             catch (Exception)
             {

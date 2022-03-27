@@ -81,5 +81,29 @@ namespace PRN221_Project_ShopOnline.DAO
             context.Carts.RemoveRange(carts);
             context.SaveChanges();
         }
+
+        //Delete 1 Item in Cart of 1 User
+        public void DeleteProductInCart(int UserId, int ProductId)
+        {
+            context = new ElectronicShopPRN221Context();
+
+            Cart cart = context.Carts.SingleOrDefault(c => c.UserId == UserId && c.ProductId == ProductId);
+            context.Carts.Remove(cart);
+            context.SaveChanges();
+        }
+
+        /*-------------Seller-------------*/
+        //Used for Delete Product (DAO)
+        public void DeleteCartsOfProduct(int ProductId)
+        {
+            //Get Carts of this Product
+            context = new ElectronicShopPRN221Context();
+            List<Cart> carts = context.Carts.Where(c => c.ProductId == ProductId).ToList();
+
+            //Delete
+            context = new ElectronicShopPRN221Context();
+            context.Carts.RemoveRange(carts);
+            context.SaveChanges();
+        }
     }
 }

@@ -46,27 +46,36 @@
                 </tr>
             </thead>
             <tbody>
+                <!--List Cart-->
                 @foreach (Cart cart in carts)
                 {
                     <tr>
                         <th scope="row">@cart.Product.ProductId</th>
-                        <td>@cart.Product.ProductName</td>
+                        <!--Click to ProductDetail-->
+                        <td>
+                            <a href="/ProductDetail/Index?ProductID=@cart.ProductId">
+                                @cart.Product.ProductName
+                            </a>
+                        </td>
                         <td><img src="/image/@cart.Product.ImageLink"></td>
                         <td>@cart.Product.GetPriceWithDot() VND</td>
                         <td>@cart.Amount</td>
-                        <td><a href="deleteProductInCart?ProductID=@cart.Product.ProductId" type="button" class="btn btn-outline-info">
+                        <td><a href="/Cart/DeleteProductInCart?ProductID=@cart.ProductId" type="button" class="btn btn-outline-info">
                             Delete</a></td>
                     </tr>
                 }
             </tbody>
         </table>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <!--Total Price-->
             <button type="button" class="btn btn-warning">Total</button>
             <button type="button" class="btn btn-outline-primary">@totalPrice VND</button>
         </div>
         <div>&emsp;</div>
+        <!--To Finish-->
         <div><a type="button" href="/Cart/Buy" class="btn btn-info btn-lg">Pay</a></div>
-        <a type="button" href="deleteCart" class="btn btn-danger" style="float: right">Delete Cart</a>
+        <!--Delete all Cart-->
+        <a type="button" href="/Cart/DeleteCart" class="btn btn-danger" style="float: right">Delete Cart</a>
         <div>&emsp;</div><div>&emsp;</div><div>&emsp;</div>
     </div>
 
