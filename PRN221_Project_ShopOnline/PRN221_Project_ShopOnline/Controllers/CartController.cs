@@ -179,10 +179,17 @@ namespace PRN221_Project_ShopOnline.Controllers
                 totalPrice += (int)cart.Product.SellPrice * (int)cart.Amount;
             }
 
+            //Get User Email
+            UserDAO userDAO = new UserDAO();
+            User user = userDAO.GetAccountById(UserId);
+            string email = user.Email;
+
             //set to view
             ViewBag.Carts = carts;
             ViewBag.Ships = ships;
-            ViewBag.TotalPrice = totalPrice;
+            ViewBag.TotalPrice = GetPriceWithDot(totalPrice);
+            ViewBag.CountNumCart = carts.Count;
+            ViewBag.UserEmail = email;
 
             return View("Views/Buy.cshtml");
         }
