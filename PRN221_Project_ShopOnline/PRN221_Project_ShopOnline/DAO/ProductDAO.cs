@@ -91,7 +91,10 @@ namespace PRN221_Project_ShopOnline.DAO
             if (product != null)
             {
                 //Before remove: remove all orderDetails & Carts of this Product
-
+                CartDAO cartDAO = new CartDAO();
+                cartDAO.DeleteCartsOfProduct(productId);
+                OrderDAO orderDAO = new OrderDAO();
+                orderDAO.DeleteOrderDetailsByProduct(productId);
 
                 //Remove Product
                 context.Products.Remove(product);

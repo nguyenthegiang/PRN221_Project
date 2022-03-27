@@ -92,6 +92,7 @@ namespace PRN221_Project_ShopOnline.DAO
             context.SaveChanges();
         }
 
+        /*-------------Seller-------------*/
         //Used for Delete Product (DAO)
         public void DeleteCartsOfProduct(int ProductId)
         {
