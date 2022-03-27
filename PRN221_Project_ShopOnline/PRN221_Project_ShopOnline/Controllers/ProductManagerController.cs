@@ -8,6 +8,7 @@ using PRN221_Project_ShopOnline.Models;
 using PRN221_Project_ShopOnline.DAO;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace PRN221_Project_ShopOnline.Controllers
 {
@@ -49,9 +50,12 @@ namespace PRN221_Project_ShopOnline.Controllers
         {
             try
             {
+                //Get Image Path from JSON
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                string rootdir = config.GetSection("ImageRootPath").Value.ToString();
+
                 //Copy Image file to Project Folder
-                string filename = Path.Combine
-                    (@"D:\Study\Semester7\PRN221\Project\PRN221_Project\PRN221_Project_ShopOnline\PRN221_Project_ShopOnline\wwwroot\image", image.FileName);
+                string filename = Path.Combine(rootdir, image.FileName);
                 using (var fs = new FileStream(filename, FileMode.Create))
                 {
                     image.CopyTo(fs);
