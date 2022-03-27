@@ -62,6 +62,42 @@ namespace PRN221_Project_ShopOnline.DAO
             User user = GetAccountById(userId);
             if (user != null)
             {
+                /*Before Delete: Delete all this User's Cart, Address, OrderDetail, ShipInfo, Order*/
+                //Cart
+                CartDAO cartDAO = new CartDAO();
+                cartDAO.DeleteCart(userId);
+                //UserAddress
+                context = new ElectronicShopPRN221Context();
+                List<UserAddress> addresses = context.UserAddresses.Where(u => u.UserId == userId).ToList();
+                context = new ElectronicShopPRN221Context();
+                context.UserAddresses.RemoveRange(addresses);
+                context.SaveChanges();
+                //Order
+                OrderDAO orderDAO = new OrderDAO();
+                List<Order> orders = orderDAO.GetOrdersByUser(userId);
+                //With each order:
+                foreach (Order order in orders)
+                {
+                    //delete all its OrderDetails
+                    List<OrderDetail> orderDetails = orderDAO.GetOrderDetailsByOrder(order.Id);
+                    foreach (OrderDetail orderDetail in orderDetails)
+                    {
+                        orderDAO.DeleteOrderDetail(orderDetail);
+                    }
+
+                    //delete all its ShipInfo
+                    context = new ElectronicShopPRN221Context();
+                    List<ShipInfo> shipInfos = context.ShipInfos.Where(s => s.OrderId == order.Id).ToList();
+                    context = new ElectronicShopPRN221Context();
+                    context.ShipInfos.RemoveRange(shipInfos);
+                    context.SaveChanges();
+
+                    //delete the Order
+                    orderDAO.DeleteOrder(order);
+                }
+
+                /*Delete User*/
+                context = new ElectronicShopPRN221Context();
                 context.Users.Remove(user);
                 context.SaveChanges();
 
