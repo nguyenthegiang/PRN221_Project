@@ -97,7 +97,10 @@
                                     </a>
                                     <form action="DeleteAccount" method="POST" style="display:inline">
                                         <a>
-                                            <input type="submit" class="btn btn-outline-danger btn-sm" value="Delete" onclick="if (confirm('Are you sure you want to delete?'))
+                                            <!--Only allow delete Customer-->
+                                            <input type="submit" class="btn btn-outline-danger btn-sm" value="Delete" 
+                                                   @(user.IsAdmin == 1 || user.IsSeller == 1 ? "disabled" : "")
+                                                   onclick="if (confirm('Are you sure you want to delete?'))
                                                  form.action = 'DeleteAccount?UserId=@user.UserId';
                                                     else
                                                         return false;" />
