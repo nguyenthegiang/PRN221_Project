@@ -107,22 +107,27 @@
                     <tbody>
                         @foreach (Product product in products)
                         {
-                            <tr>
-                                <td>@product.ProductId</td>
-                                <td>@product.ProductName</td>
-                                <td><img src="~/image/@product.ImageLink" style="height: 100px"></td>
-                                <td>@product.GetPriceWithDot() VND</td>
-                                <td>
-                                    <!--Edit Product Link-->
-                                    <a href="/ProductManager/EditProduct?productId=@product.ProductId" class="edit">
-                                        <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                    </a>
-                                    <!--Delete Product Link-->
-                                    <a href="#deleteEmployeeModal" onclick="SetProductIDDelete(@product.ProductId)" class="delete" data-toggle="modal">
-                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>@product.ProductId</td>
+                            <!--Click to ProductDetail-->
+                            <td>
+                                <a href="/ProductDetail/Index?ProductID=@product.ProductId">
+                                    @product.ProductName
+                                </a>
+                            </td>
+                            <td><img src="~/image/@product.ImageLink" style="height: 100px"></td>
+                            <td>@product.GetPriceWithDot() VND</td>
+                            <td>
+                                <!--Edit Product Link-->
+                                <a href="/ProductManager/EditProduct?productId=@product.ProductId" class="edit">
+                                    <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                </a>
+                                <!--Delete Product Link-->
+                                <a href="#deleteEmployeeModal" onclick="SetProductIDDelete(@product.ProductId)" class="delete" data-toggle="modal">
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
