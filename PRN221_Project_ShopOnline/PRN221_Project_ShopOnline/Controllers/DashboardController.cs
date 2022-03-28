@@ -68,6 +68,16 @@ namespace PRN221_Project_ShopOnline.Controllers
            
             ViewBag.ProdPerCate = prodCat;
 
+            //total revenue
+            context = new ElectronicShopPRN221Context();
+            List<OrderDetail> allOrderDetail = context.OrderDetails.ToList();
+            int totalRevenue = 0;
+            foreach (OrderDetail o in allOrderDetail)
+            {
+                totalRevenue += o.ProductPrice;
+            }
+            ViewBag.TotalRevenue = totalRevenue;
+
         }
     }
 }
